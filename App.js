@@ -1,19 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+
+import Header from './Source/Components/Header/Header';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <View style={styles.appWrapper}>
+
+      {/* Title and Location Name */}
+      <Header />
+
+      {/* Current */}
+      
+
+      {/* Daily */}
+
+
+      {/* Hourly */}
+
+
+      {/* More About Today */}
+
+
+      {/* Navigation */}
+
+        {/* Menu */}
+
+        {/* City Name */}
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  appWrapper: {
+    padding: 20,
+  }
 });
