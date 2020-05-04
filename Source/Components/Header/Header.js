@@ -13,7 +13,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     HeaderWrapper: {
-        paddingTop: 10,
+        paddingTop: 20,
         margin: "auto",
         alignItems: "center",
     },
