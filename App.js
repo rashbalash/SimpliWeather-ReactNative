@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Button } from 'react-native';
 
 import Header from './Source/Components/Header/Header';
 import Current from './Source/Components/CurrentTemperature/Current';
@@ -10,35 +10,43 @@ import Navigation from './Source/Components/Navigation/Navigation';
 
 export default function App() {
   return (
-    <ScrollView>
-    <View style={styles.appWrapper}>
-      {/* Title and Location Name */}
-      <Header />
+    <View style={ styles.appWrapper }>
+      <ScrollView >
+      <View style={styles.contentWrapper}>
+        
+        {/* Title and Location Name */}
+        <Header />
 
-      {/* Current */}
-      <Current />
+        {/* Current */}
+        <Current />
 
-      {/* Hourly */}
-      <Hourly />
+        {/* Hourly */}
+        <Hourly />
 
-      {/* Daily */}
-      <Daily />
+        {/* Daily */}
+        <Daily />
 
-      {/* More About Today */}
-      <More />
+        {/* More About Today */}
+        <More />
 
-      {/* Navigation */}
+        {/* Navigation */}
+        
+          {/* Menu */}
+
+          {/* City Name */}
+        
+      </View>
+      </ScrollView>
       <Navigation />
-        {/* Menu */}
-
-        {/* City Name */}
     </View>
-    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   appWrapper: {
+    flex: 1,
+  },
+  contentWrapper: {
     padding: 20,
   }
 });

@@ -12,7 +12,7 @@ export default function Hourly() {
                 <Text style={ styles.HourlyTime }>12:00 PM</Text>
 
                 {/* Icon */}
-                <Image source={require('../../weathericons/animated/day.svg')} style={ { width: 100, height: 100 } }/>
+                <Image source={require('../../weathericons/static/day.svg')} style={ { width: 100, height: 100 } }/>
 
                 {/* Temperature */}
                 <Text style={ styles.HourlyTemp }>69&deg;</Text>            

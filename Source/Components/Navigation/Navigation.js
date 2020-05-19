@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 
-import { createMaterialBottomTabNavigation } from 'react-navigation-material-bottom-tabs';
-
-class CurrentLocation extends Component {
+class Navigation extends Component {
     render() {
         return (
-            <View>
-                <Text>Current Location</Text>
+            <View style={ styles.NavigationWrapper }>
+                    <Text style={ styles.NavigationLocationNames }>City Name</Text>
             </View>
-        );
+        )
     }
 }
 
-class Bethesda extends Component {
-    render() {
-        return (
-            <View>
-                <Text>Bethesda</Text>
-            </View>
-        );
+const styles = StyleSheet.create({
+    NavigationWrapper: {
+        display: "flex",
+        justifyContent: "center",
+        padding: 10
+    },
+    NavigationLocationNames: {
+        fontSize: 16,
+        alignSelf: "center",
     }
-}
-
-export default createMaterialBottomTabNavigation({
-    CurrentLocation: { screen: CurrentLocationScreen }, 
-    Bethesda: { screen: BethesdaScreen }
 })
+
+export default Navigation;

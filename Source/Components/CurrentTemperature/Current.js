@@ -7,7 +7,7 @@ export default function Current() {
         <View style={ styles.CurrentWrapper }>
 
             <View style={ styles.iconAndTemp }>
-                <Image source={require('../../weathericons/animated/day.svg')} style={ styles.currentWeatherIcon }/>
+                <Image source={require('../../weathericons/static/day.svg')} style={ styles.currentWeatherIcon }/>
                 <Text style={ styles.CurrentTemp }>69&deg;</Text>
             </View>
             

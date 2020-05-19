@@ -11,7 +11,7 @@ export default function Daily() {
         <View style={ styles.DayWrapper }>
             <Text style={ styles.DailyDay }>Day</Text>
 
-            <Image source={require('../../weathericons/animated/day.svg')} style={ { width: 100, height: 100 } }/>
+            <Image source={require('../../weathericons/static/day.svg')} style={ { width: 100, height: 100 } }/>
 
             <Text style={ styles.DailyTemps }>Hi&deg; | Lo&deg;</Text>
         </View>
