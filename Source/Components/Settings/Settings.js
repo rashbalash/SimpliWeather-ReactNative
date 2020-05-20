@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 
-class Navigation extends Component {
+class Settings extends Component {
     render() {
         return (
-            <View style={ styles.NavigationWrapper }>
-                    <Text style={ styles.NavigationLocationNames }>City Name</Text>
+            <View style={ styles.SettingsWrapper }>
+                <Button title="Click"></Button>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    NavigationWrapper: {
+    SettingsWrapper: {
         display: "flex",
         justifyContent: "center",
         padding: 10
     },
-    NavigationLocationNames: {
-        fontSize: 16,
-        alignSelf: "center",
-    }
 })
 
-export default Navigation;
+export default Settings;

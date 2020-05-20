@@ -6,7 +6,7 @@ import Current from './Source/Components/CurrentTemperature/Current';
 import Daily from './Source/Components/DailyTemperature/Daily';
 import Hourly from './Source/Components/HourlyTemperature/Hourly';
 import More from './Source/Components/MoreAboutToday/More';
-import Navigation from './Source/Components/Navigation/Navigation';
+import Settings from './Source/Components/Settings/Settings';
 
 export default function App() {
   return (
@@ -37,7 +37,7 @@ export default function App() {
         
       </View>
       </ScrollView>
-      <Navigation />
+      <Settings />
     </View>
   );
 }

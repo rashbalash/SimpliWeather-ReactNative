@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Image from 'react-native-remote-svg';
+import LottieView from 'lottie-react-native';
 
 export default function Current() {
     return (
         <View style={ styles.CurrentWrapper }>
-
+            
             <View style={ styles.iconAndTemp }>
-                <Image source={require('../../weathericons/static/day.svg')} style={ styles.currentWeatherIcon }/>
+            <LottieView source={require('../../weathericons/thing.json')} colorFilters={[{ keypath: "button", color: "#F00000" },{ keypath: "Sending Loader", color: "#F00000" }]}style={{ width:200, height: 200 }} autoPlay loop/>
                 <Text style={ styles.CurrentTemp }>69&deg;</Text>
             </View>
             
