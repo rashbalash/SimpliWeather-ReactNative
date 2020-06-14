@@ -1,4 +1,6 @@
-import { ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_MODE } from '../Actions/Actions';
+import { ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_THEME } from '../Actions/Actions';
+import {weatherUnit, theme} from '../../Constants';
+
 
 function reducer( state={}, action) {
 
@@ -12,16 +14,24 @@ function reducer( state={}, action) {
         case CHANGE_UNITS:
             return {
                 ...state,
-                weatherUnit: state.weatherUnit === 'F' ? 'C' : 'F',
+                weatherUnit: state.weatherUnit === weatherUnit.IMPERIAL ? weatherUnit.METRIC : weatherUnit.IMPERIAL,
             };
 
-        case CHANGE_MODE:
-            return state;
+        case CHANGE_THEME:
+            return {
+                ...state,
+                theme: state.theme === theme.LIGHT ? theme.DARK : theme.LIGHT,  
+            };
         
         default:
             return state;
     }
-
 }
 
-export default reducer;
+export const initialState = {
+    weatherUnit: weatherUnit.IMPERIAL,
+    theme: theme.LIGHT,
+    location: { zipcode: `20852` },
+}
+
+export default reducer; 

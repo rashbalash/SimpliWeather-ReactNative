@@ -6,13 +6,14 @@ export default function Hourly() {
 
     var hourlyData = []
 
-    for (let i =0; i < 5; ++i) {
+    for (let i =0; i < 10; ++i) {
         hourlyData.push(
             <View key={i} style={ styles.HourWrapper }>
                 <Text style={ styles.HourlyTime }>12:00 PM</Text>
 
                 {/* Icon */}
-                <LottieView source={require('../../weathericons/animated/day.json')} style={ styles.HourlyIcon } autoPlay loop/>
+                
+                <LottieView source={require('../../weathericons/animated/partly-shower.json')} style={ styles.HourlyIcon } autoPlay loop/>
                 {/* Temperature */}
                 <Text style={ styles.HourlyTemp }>69&deg;</Text>            
             </View>
@@ -36,29 +37,25 @@ export default function Hourly() {
 
 const styles = StyleSheet.create({
     HourlyWrapper: {
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     HourlyHeader: {
         fontSize: 30,
     },
     HourlyTime: {
         fontSize: 16,
-        marginBottom: -20,
     },
     HourlyTemp: {
         fontSize: 16,
-        marginTop: -20,
     },
     HourWrapper: {
         paddingTop: 15,
         display: "flex",
         alignItems: "center",
+        width: 100,
     },
     HourlyIcon: {
-        width: 50,
-        height: 50,
-        marginTop: 10,
-        marginRight: 20,
-        paddingBottom: 30,
+        width: 65,
+        height: 65,
     }
 })

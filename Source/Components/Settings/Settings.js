@@ -27,7 +27,7 @@ class Settings extends Component {
                         { icon: 'information', label: 'About', onPress: () => this.setState({ aboutModalOpen: true })},
                         { icon: 'plus', label: 'Add a Location', onPress: () => console.log('Pressed Add') },
                         { icon: 'minus', label: 'Remove Location', onPress: () => console.log('Pressed Remove') },
-                        { icon: 'moon-waxing-crescent', label: 'Dark or Light Mode', onPress: () => console.log('Pressed Mode')}, // white-balance-sunny
+                        { icon: 'moon-waxing-crescent', label: 'Dark or Light Mode', onPress: () => this.props.onThemeChange() }, // white-balance-sunny
                         { icon: 'temperature-fahrenheit', label: 'Fahrenheit or Celsius', onPress: () => this.props.onUnitChange() }, // temperature-celsius
                         ]}
                         small
@@ -40,7 +40,6 @@ class Settings extends Component {
                 </Portal>
 
                 <About isModalOpen={ this.state.aboutModalOpen } closeModal={ () => this.setState({ aboutModalOpen: false }) }/>
-                <Text>{ this.props.weatherUnit }</Text>
             </View>
         )
     }
@@ -49,7 +48,6 @@ class Settings extends Component {
 const styles = StyleSheet.create({
     fab: {
         backgroundColor: '#D64045'
-        
     },
 })
 

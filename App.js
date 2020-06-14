@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentWrapper: {
-    padding: 20,
+    paddingTop: 20,
+    padding: 15,
   }
 });

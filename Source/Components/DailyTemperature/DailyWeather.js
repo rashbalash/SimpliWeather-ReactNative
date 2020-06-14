@@ -42,19 +42,18 @@ const styles = StyleSheet.create({
     },
     DailyDay: {
         fontSize: 16,
-        marginBottom: -20,
     },
     DailyTemps: {
         fontSize: 16,
-        marginTop: -20,
     },
     DayWrapper: {
         paddingTop: 15,
         display: "flex",
         alignItems: "center",
+        width: 100,
     },
     DailyIcon: {
-        width: 100,
-        height: 100,
+        width: 65,
+        height: 65,
     }
 })
