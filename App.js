@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, Button } from 'react-native';
 
-import Header from './Source/Components/Header/Header';
+import HeaderContainer from './Source/Components/Header/HeaderContainer';
 import CurrentWeatherContainer from './Source/Components/CurrentTemperature/CurrentWeatherContainer';
 import DailyWeatherContainer from './Source/Components/DailyTemperature/DailyWeatherContainer';
 import HourlyWeatherContainer from './Source/Components/HourlyTemperature/HourlyWeatherContainer';
@@ -21,7 +21,7 @@ export default function App() {
         <View style={styles.contentWrapper}>
           
           {/* Title and Location Name */}
-          <Header />
+          <HeaderContainer />
 
           {/* Current */}
           <CurrentWeatherContainer />

@@ -3,12 +3,15 @@ import More from './More';
 
 const mapStateToProps = (state) => {
     return {
-        morePrecipitation: state.morePrecipitation,
-        moreHumidity: state.moreHumidity,
-        moreSunrise: state.moreSunrise,
-        moreSunset: state.moreSunset,
-        moreWind: state.moreSunset,
-        morePressure: state.morePressure
+        precipitation: state.reducer.moreAboutToday.precipitation,
+        precipitationUnit: state.reducer.moreAboutToday.precipitationUnit,
+        humidity: state.reducer.moreAboutToday.humidity,
+        sunrise: state.reducer.moreAboutToday.sunrise,
+        sunset: state.reducer.moreAboutToday.sunset,
+        wind: state.reducer.moreAboutToday.wind,
+        windSpeedUnit: state.reducer.moreAboutToday.windSpeedUnit,
+        windDirection: state.reducer.moreAboutToday.windDirection,
+        pressure: state.reducer.moreAboutToday.pressure,
     };
 };
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Header() {
+export default function Header(props) {
     return (
         <View style={ styles.HeaderWrapper }>
             <Text style={ styles.HeaderTitle }>SimpliWeather</Text>
-            <Text style={ styles.HeaderCityName }>City Name</Text>
+            <Text style={ styles.HeaderCityName }>{ props.locationName }</Text>
         </View>
     )
 }

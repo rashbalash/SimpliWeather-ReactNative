@@ -2,24 +2,24 @@ import React from 'react';
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import LottieView from 'lottie-react-native';
 
-export default function Hourly() {
+export default function Hourly(props) {
 
     var hourlyData = []
 
-    for (let i =0; i < 10; ++i) {
-        hourlyData.push(
-            <View key={i} style={ styles.HourWrapper }>
-                <Text style={ styles.HourlyTime }>12:00 PM</Text>
-
-                {/* Icon */}
-                
-                <LottieView source={require('../../weathericons/animated/partly-shower.json')} style={ styles.HourlyIcon } autoPlay loop/>
-                {/* Temperature */}
-                <Text style={ styles.HourlyTemp }>69&deg;</Text>            
-            </View>
-        )
+    if (!!props.hourlyWeatherData) {
+        for (let i =0; i < 12; ++i) {
+            hourlyData.push(
+                <View key={i} style={ styles.HourWrapper }>
+                    {/* Time */}
+                    <Text style={ styles.HourlyTime }>{ props.hourlyWeatherData[i].hour }:00 { props.hourlyWeatherData[i].amOrPm }</Text>
+                    {/* Icon */}
+                    <LottieView source={require('../../weathericons/animated/partly-shower.json')} style={ styles.HourlyIcon } autoPlay loop/>
+                    {/* Temperature */}
+                    <Text style={ styles.HourlyTemp }>{ props.hourlyWeatherData[i].temperature }&deg;</Text>
+                </View>
+            )
+        }
     }
-
     return (
         <View style={ styles.HourlyWrapper }>
             <Text style={ styles.HourlyHeader }>Hourly</Text>

@@ -2,22 +2,24 @@ import React from 'react';
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import LottieView from 'lottie-react-native';
 
-export default function Daily() {
+export default function Daily(props) {
 
     var dailyData = [];
 
-    for (let i =0; i < 5; ++i) {
-        dailyData.push(
-        <View key={i} style={ styles.DayWrapper }>
-            <Text style={ styles.DailyDay }>Day</Text>
-
-            {/* Icon */}
-            <LottieView source={require('../../weathericons/animated/day.json')} style={ styles.DailyIcon } autoPlay loop/>
-
-            {/* Temperature */}
-            <Text style={ styles.DailyTemps }>Hi&deg; | Lo&deg;</Text>
-        </View>
-        )
+    if (!!props.dailyWeatherData) {
+        for (let i =0; i < props.dailyWeatherData.length; ++i) {
+            dailyData.push(
+            <View key={i} style={ styles.DayWrapper }>
+                
+                {/* Day */}
+                <Text style={ styles.DailyDay }>{ props.dailyWeatherData[i].day }</Text>
+                {/* Icon */}
+                <LottieView source={require('../../weathericons/animated/day.json')} style={ styles.DailyIcon } autoPlay loop/>
+                {/* Temperature */}
+                <Text style={ styles.DailyTemps }>{ props.dailyWeatherData[i].hi }&deg; | { props.dailyWeatherData[i].lo }&deg;</Text>
+            </View>
+            )
+        }
     }
 
     return (

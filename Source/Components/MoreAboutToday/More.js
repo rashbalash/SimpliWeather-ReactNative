@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-export default function More() {
+export default function More(props) {
     return (
         <View>
             <Text style={ styles.MoreHeader }>More About Today</Text>
@@ -13,21 +13,21 @@ export default function More() {
                         Precipitation
                     </Text>
                     <Text style={ styles.itemValue }>
-                        Inches | CM
+                        { props.precipitation } { props.precipitationUnit }
                     </Text>
 
                     <Text style={ styles.itemName }>
                         Sunrise
                     </Text>
                     <Text style={ styles.itemValue }>
-                        AM
+                        { props.sunrise } AM
                     </Text>
                     
                     <Text style={ styles.itemName }>
                         Wind
                     </Text>
                     <Text style={ styles.itemValue }>
-                        mph | kmh
+                        { props.wind } { props.windSpeedUnit } { props.windDirection } 
                     </Text>
                 </View>
 
@@ -37,21 +37,21 @@ export default function More() {
                         Humidity
                     </Text>
                     <Text style={ styles.itemValue }>
-                        %
+                        { props.humidity }% 
                     </Text>
 
                     <Text style={ styles.itemName }>
                         Sunset
                     </Text>
                     <Text style={ styles.itemValue }>
-                        PM
+                        { props.sunset } PM
                     </Text>
 
                     <Text style={ styles.itemName }>
                         Pressure
                     </Text>
                     <Text style={ styles.itemValue }>
-                        hPa
+                        { props.pressure } hPa
                     </Text>
                 </View>                
             </View>
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     MoreDetails: {
         paddingTop: 0,
         padding: 15,
+        paddingBottom: 60,
         flexDirection: "row",
         justifyContent: "space-between"
     },

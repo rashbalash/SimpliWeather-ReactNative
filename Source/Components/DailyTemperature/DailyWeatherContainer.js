@@ -3,10 +3,7 @@ import DailyWeather from './DailyWeather';
 
 const mapStateToProps = (state) => {
     return {
-        dailyTemp: state.dailyTemp,
-        dailyCondition: state.dailyCondition,
-        dailyHi: state.dailyHi,
-        dailyLo: state.dailyLo
+        dailyWeatherData: state.reducer.dailyWeatherData,
     };
 };
 

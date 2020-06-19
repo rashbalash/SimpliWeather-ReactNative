@@ -2,42 +2,42 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 
-export default function CurrentWeather() {
+export default function CurrentWeather(props) {
     return (
         <View style={ styles.CurrentWrapper }>
             
             <View style={ styles.iconAndTemp }>
-                <Text style={ styles.CurrentTemp }>69&deg;</Text>
+                <LottieView source={require('../../weathericons/animated/day.json')} style={ styles.currentWeatherIcon } autoPlay loop/>
+                <Text style={ styles.CurrentTemp }>{ props.currentTemp }&deg;</Text>
             </View>
             
-            <Text style={ styles.CurrentDetails }>Condition | Hi&deg; | Lo&deg;</Text>
+            <Text style={ styles.CurrentDetails }>{ props.currentCondition } | { props.currentHi }&deg; | { props.currentLo }&deg;</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     CurrentWrapper: {
-        alignItems: "center",
+        // marginTop: 60,
         padding: 20,
         paddingBottom: 90
     },
     CurrentDetails: {
         fontSize: 18,
+        marginTop: 20,
+        textAlign: "center"
     },
     iconAndTemp: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
-        // marginTop: 60
+        justifyContent: "space-evenly",
     },  
     currentWeatherIcon: {
-        alignSelf: "flex-start",
-        width: 100,
-        height: 130,
+        width: 150,
+        height: 150,
     },
     CurrentTemp: {
         fontSize: 84,
-        alignSelf: "flex-end"
     }
 })

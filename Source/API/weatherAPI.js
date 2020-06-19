@@ -1,25 +1,21 @@
 import { apikey } from './apikey';
 
 const owmRootUrl = `https://api.openweathermap.org/data/2.5/`;
-const forecastUrl = `${owmRootUrl}forecast?`;
 const weatherUrl = `${owmRootUrl}weather?`;
+const oneCallUrl = `${owmRootUrl}onecall?`;
 
 export const getCurrentWeather = (location, tempScale) => {
 
-    console.log(location, tempScale);
-
     let url;
     if (!!location.lat && !!location.lon)  {
-        url = `${weatherUrl}lat=${ location.lat }&lon=${ location.lon }&units=${ tempScale }&appid=${  apikey }`;
+        url = `${weatherUrl}lat=${ location.lat }&lon=${ location.lon }&units=${ tempScale }&appid=${ apikey }`;
     } else if (!!location.zipcode) {
-        url = `${weatherUrl}zip=${ location.zipcode },${ "US" }&units=${ tempScale }&appid=${  apikey }`;
+        url = `${weatherUrl}zip=${ location.zipcode },${ "US" }&units=${ tempScale }&appid=${ apikey }`;
     } else if (!!location.city) {
-        url = `${weatherUrl}q=${ location.city },${ "US" }&units=${ tempScale }&appid=${  apikey }`;
+        url = `${weatherUrl}q=${ location.city },${ "US" }&units=${ tempScale }&appid=${ apikey }`;
     } else {
         console.log("No Data");
     } 
-
-    console.log(url);
 
     return fetch(url)
         .then((response) => {
@@ -36,15 +32,16 @@ export const getDailyWeather = (location, tempScale) => {
 
     let url;
     if (!!location.lat && !!location.lon)  {
-        url = `${forecastUrl}lat=${ location.lat }&lon=${ location.lon }&units=${ tempScale }&appid=${  apikey }`;
+        url = `${oneCallUrl}lat=${ location.lat }&lon=${ location.lon }&units=${ tempScale }&exclude=minutely&appid=${ apikey }`;
     } else if (!!location.zipcode) {
-        url = `${forecastUrl}zip=${ location.zipcode },${ "US" }&units=${ tempScale }&appid=${  apikey }`;
+        url = `${oneCallUrl}zip=${ location.zipcode },${ "US" }&units=${ tempScale }&appid=${ apikey }`;
     } else if (!!location.city) {
-        url = `${forecastUrl}q=${ location.city },${ "US" }&units=${ tempScale }&appid=${  apikey }`;
+        url = `${oneCallUrl}q=${ location.city },${ "US" }&units=${ tempScale }&appid=${ apikey }`;
     }    
     else {
         console.log("No Data");
     }
+
     return fetch(url)
         .then((response) => {
             return response.json();
