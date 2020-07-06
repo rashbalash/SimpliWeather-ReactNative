@@ -1,4 +1,4 @@
-import { ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_THEME, SET_LOCATION_NAME, SET_CURRENT_WEATHER, SET_MORE_ABOUT_TODAY, SET_HOURLY_WEATHER, SET_DAILY_WEATHER } from '../Actions/Actions';
+import { START_APP, SET_STATE, REFRESH, LOADING_SCREEN, SET_NEW_LOCATION, ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_THEME, SET_LOCATION_NAME, SET_CURRENT_WEATHER, SET_MORE_ABOUT_TODAY, SET_HOURLY_WEATHER, SET_DAILY_WEATHER } from '../Actions/Actions';
 import {weatherUnit, theme} from '../../Constants';
 
 const windArr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
@@ -6,9 +6,33 @@ const windArr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
 function reducer( state={}, action) {
 
     switch(action.type) {
-        case ADD_NEW_LOCATION:
-            return state;
-    
+
+        case SET_STATE:
+            return {
+                ...action.state
+            }
+
+        case REFRESH:
+            return {
+                ...state,
+                refreshing: true,
+            }
+
+        case LOADING_SCREEN:
+
+            return {
+                ...state,    
+            }
+
+        case SET_NEW_LOCATION:
+            return {
+                ...state,
+                location: {
+                    lat: action.location.latitude,
+                    lon: action.location.longitude,
+                }
+            };
+
         case UPDATE_LOCATION:
             return state;
 
@@ -27,72 +51,32 @@ function reducer( state={}, action) {
         case SET_LOCATION_NAME:
             return {
                 ...state,
+                refreshing: true,
+                location: {
+                    lat: action.weatherData.coord.lat,
+                    lon: action.weatherData.coord.lon,
+                },
                 locationName: action.weatherData.name,
             }
 
         case SET_CURRENT_WEATHER:
             return {
                 ...state,
-                location: {
-                    lat: action.weatherData.coord.lat,
-                    lon: action.weatherData.coord.lon,
-                },
-                currentWeather: {
-                    temp: Math.round(action.weatherData.main.temp),
-                    condition: action.weatherData.weather[0].main,
-                    hi: Math.round(action.weatherData.main.temp_max),
-                    lo: Math.round(action.weatherData.main.temp_min),
-                }
+                currentWeather: action.currentWeather
             };
 
         case SET_HOURLY_WEATHER:
 
-            let hourlyWeatherData = [];
-
-            for (var i = 0; i < action.dailyWeatherData.hourly.length; ++i) {
-                
-                var hour = new Date((action.dailyWeatherData.hourly[i].dt) * 1000).getHours();
-                
-                var ifAmOrPm = hour > 12 ? 'PM' : 'AM';
-
-                hour = hour > 12 ? hour - 12 : hour;
-                hour = hour === 0 ? hour + 12 : hour;
-                
-                hourlyWeatherData.push(
-                    {
-                        hour: hour,
-                        amOrPm: ifAmOrPm,
-                        condition: action.dailyWeatherData.hourly[i].weather.main,
-                        temperature: Math.round(action.dailyWeatherData.hourly[i].temp)
-                    }
-                )
-            };
-
             return {
                 ...state,
-                hourlyWeatherData: hourlyWeatherData,
+                hourlyWeatherData: action.hourlyWeatherData,
             };
 
         case SET_DAILY_WEATHER:
-            let dailyWeatherData = [];
-
-            for (var i = 0; i < action.dailyWeatherData.daily.length; ++i) {
-
-                var day = new Date((action.dailyWeatherData.daily[i].dt) * 1000).toUTCString().slice(0, 3);
-
-                dailyWeatherData.push(
-                    {
-                        day: day,
-                        condition: action.dailyWeatherData.daily[i].weather.main,
-                        hi: Math.round(action.dailyWeatherData.daily[i].temp.max),
-                        lo: Math.round(action.dailyWeatherData.daily[i].temp.min)
-                    }
-                )
-            };
-
+            
             return {
                 ...state,
-                dailyWeatherData: dailyWeatherData,
+                dailyWeatherData: action.dailyWeatherData,
             };
 
         case SET_MORE_ABOUT_TODAY:
@@ -127,15 +111,17 @@ function reducer( state={}, action) {
 }
 
 export const initialState = {
-    locationName: "",
+    locationName: null,
     weatherUnit: weatherUnit.IMPERIAL,
     theme: theme.LIGHT,
     location: { 
-        lat: "",
-        lon: "",
-        zipcode: "20852",
-        city: ""
+        lat: null,
+        lon: null,
+        zipcode: null,
+        city: null
     },
+    geocode:null,
+    errorMessage:"",
     currentWeather: {
     },
     hourlyWeather: {
@@ -144,6 +130,7 @@ export const initialState = {
     },
     moreAboutToday: {
     },
+    refreshing: false,
 }
 
 export default reducer;

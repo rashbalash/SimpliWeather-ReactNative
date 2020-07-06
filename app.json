@@ -2,6 +2,15 @@
   "expo": {
     "name": "SimpliWeather",
     "slug": "SimpliWeather",
+    "ios": {
+      "bundleIdentifier": "SimpliWeather.com",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "SimpliWeather.com",
+      "versionCode": 1
+    },
     "platforms": [
       "ios",
       "android",
@@ -21,8 +30,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    }
+    "description": ""
   }
 }

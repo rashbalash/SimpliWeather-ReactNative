@@ -7,6 +7,8 @@ const mapStateToProps = (state) => {
         currentCondition: state.reducer.currentWeather.condition,
         currentHi: state.reducer.currentWeather.hi,
         currentLo: state.reducer.currentWeather.lo,
+        id: state.reducer.currentWeather.id,
+        isDay: state.reducer.currentWeather.isDay,
     };
 };
 

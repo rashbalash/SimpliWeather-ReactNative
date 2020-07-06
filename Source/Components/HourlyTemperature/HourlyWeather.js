@@ -1,19 +1,19 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
-import LottieView from 'lottie-react-native';
+import WeatherIcon from '../WeatherIcon/WeatherIcon';
 
 export default function Hourly(props) {
 
     var hourlyData = []
 
     if (!!props.hourlyWeatherData) {
-        for (let i =0; i < 12; ++i) {
+        for (let i = 1; i < 14; ++i) {
             hourlyData.push(
                 <View key={i} style={ styles.HourWrapper }>
                     {/* Time */}
                     <Text style={ styles.HourlyTime }>{ props.hourlyWeatherData[i].hour }:00 { props.hourlyWeatherData[i].amOrPm }</Text>
                     {/* Icon */}
-                    <LottieView source={require('../../weathericons/animated/partly-shower.json')} style={ styles.HourlyIcon } autoPlay loop/>
+                    <WeatherIcon icon={ props.hourlyWeatherData[i].id } isDay={props.hourlyWeatherData[i].isDay} style={styles.HourlyIcon} />
                     {/* Temperature */}
                     <Text style={ styles.HourlyTemp }>{ props.hourlyWeatherData[i].temperature }&deg;</Text>
                 </View>

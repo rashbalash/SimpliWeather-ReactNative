@@ -1,40 +1,37 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Button } from 'react-native';
+import { ScrollView, StyleSheet, View, RefreshControl } from 'react-native';
 
 import HeaderContainer from './Source/Components/Header/HeaderContainer';
-import CurrentWeatherContainer from './Source/Components/CurrentTemperature/CurrentWeatherContainer';
-import DailyWeatherContainer from './Source/Components/DailyTemperature/DailyWeatherContainer';
-import HourlyWeatherContainer from './Source/Components/HourlyTemperature/HourlyWeatherContainer';
-import MoreContainer from './Source/Components/MoreAboutToday/MoreContainer';
+import WeatherPanel from './Source/Components/WeatherPanel/WeatherPanel';
 import SettingsContainer from './Source/Components/Settings/SettingsContainer';
+import LocationPanelContainer from './Source/Components/LocationPanel/LocationPanelContainer';
 
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import store from './Source/Redux/CreateStore';
 
+import { refresh } from './Source/Redux/Actions/Actions';
+
 export default function App() {
+
+  const onRefresh = React.useCallback(() => {
+    store.dispatch(refresh())
+  });
+  
   return (
     <Provider store={store}>
       <PaperProvider>
       <View style={ styles.appWrapper }>
-        <ScrollView>
+        <ScrollView refreshControl={ <RefreshControl refreshing={store.getState().reducer.refreshing} onRefresh={onRefresh} /> }>
         <View style={styles.contentWrapper}>
           
           {/* Title and Location Name */}
           <HeaderContainer />
-
-          {/* Current */}
-          <CurrentWeatherContainer />
-
-          {/* Hourly */}
-          <HourlyWeatherContainer />
-
-          {/* Daily */}
-          <DailyWeatherContainer />
-
-          {/* More About Today */}
-          <MoreContainer />
           
+          <WeatherPanel />
+
+          <LocationPanelContainer isModalOpen={ store.getState().reducer.locationName } />
+
         </View>
         </ScrollView>
         <SettingsContainer />

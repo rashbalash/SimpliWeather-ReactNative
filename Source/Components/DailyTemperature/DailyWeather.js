@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
-import LottieView from 'lottie-react-native';
+import WeatherIcon from '../WeatherIcon/WeatherIcon';
 
 export default function Daily(props) {
 
@@ -14,7 +14,7 @@ export default function Daily(props) {
                 {/* Day */}
                 <Text style={ styles.DailyDay }>{ props.dailyWeatherData[i].day }</Text>
                 {/* Icon */}
-                <LottieView source={require('../../weathericons/animated/day.json')} style={ styles.DailyIcon } autoPlay loop/>
+                <WeatherIcon icon={props.dailyWeatherData[i].id } isDay={true} style={ styles.DailyIcon } />
                 {/* Temperature */}
                 <Text style={ styles.DailyTemps }>{ props.dailyWeatherData[i].hi }&deg; | { props.dailyWeatherData[i].lo }&deg;</Text>
             </View>

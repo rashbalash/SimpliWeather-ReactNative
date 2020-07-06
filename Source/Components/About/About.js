@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
 
   },
   closeButton: {
-    // alignSelf: "flex-end",
     position: 'absolute',
     right: 0,
     top: 0,

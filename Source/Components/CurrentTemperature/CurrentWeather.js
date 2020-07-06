@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import LottieView from 'lottie-react-native';
+import WeatherIcon from '../WeatherIcon/WeatherIcon';
 
 export default function CurrentWeather(props) {
     return (
         <View style={ styles.CurrentWrapper }>
             
             <View style={ styles.iconAndTemp }>
-                <LottieView source={require('../../weathericons/animated/day.json')} style={ styles.currentWeatherIcon } autoPlay loop/>
+                <WeatherIcon icon={props.id} isDay={props.isDay} style={styles.currentWeatherIcon} />
                 <Text style={ styles.CurrentTemp }>{ props.currentTemp }&deg;</Text>
             </View>
             
