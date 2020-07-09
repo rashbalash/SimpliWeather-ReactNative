@@ -21,7 +21,8 @@ function reducer( state={}, action) {
         case LOADING_SCREEN:
 
             return {
-                ...state,    
+                ...state,
+                loading: true,
             }
 
         case SET_NEW_LOCATION:
@@ -43,6 +44,7 @@ function reducer( state={}, action) {
             };
 
         case CHANGE_THEME:
+
             return {
                 ...state,
                 theme: state.theme === theme.LIGHT ? theme.DARK : theme.LIGHT,  
@@ -51,7 +53,7 @@ function reducer( state={}, action) {
         case SET_LOCATION_NAME:
             return {
                 ...state,
-                refreshing: true,
+                refreshing: false,
                 location: {
                     lat: action.weatherData.coord.lat,
                     lon: action.weatherData.coord.lon,
@@ -102,7 +104,7 @@ function reducer( state={}, action) {
                     windSpeedUnit: windSpeedUnit,
                     windDirection: windArr[action.weatherData.wind.deg%8],
                     pressure: action.weatherData.main.pressure,
-                }
+                },
             };
 
         default:
@@ -113,7 +115,7 @@ function reducer( state={}, action) {
 export const initialState = {
     locationName: null,
     weatherUnit: weatherUnit.IMPERIAL,
-    theme: theme.LIGHT,
+    theme: theme.DARK,
     location: { 
         lat: null,
         lon: null,
@@ -131,6 +133,7 @@ export const initialState = {
     moreAboutToday: {
     },
     refreshing: false,
+    loading: false
 }
 
 export default reducer;

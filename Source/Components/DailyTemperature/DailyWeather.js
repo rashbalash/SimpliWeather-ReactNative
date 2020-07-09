@@ -1,5 +1,8 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { ScrollView as GestureHandlerScrollView } from 'react-native-gesture-handler';
+import SimpliWeatherTextContainer from '../SimpliWeatherText/SimpliWeatherTextContainer';
+
 import WeatherIcon from '../WeatherIcon/WeatherIcon';
 
 export default function Daily(props) {
@@ -10,13 +13,12 @@ export default function Daily(props) {
         for (let i =0; i < props.dailyWeatherData.length; ++i) {
             dailyData.push(
             <View key={i} style={ styles.DayWrapper }>
-                
                 {/* Day */}
-                <Text style={ styles.DailyDay }>{ props.dailyWeatherData[i].day }</Text>
+                <SimpliWeatherTextContainer style={ styles.DailyDay }>{ props.dailyWeatherData[i].day }</SimpliWeatherTextContainer>
                 {/* Icon */}
                 <WeatherIcon icon={props.dailyWeatherData[i].id } isDay={true} style={ styles.DailyIcon } />
                 {/* Temperature */}
-                <Text style={ styles.DailyTemps }>{ props.dailyWeatherData[i].hi }&deg; | { props.dailyWeatherData[i].lo }&deg;</Text>
+                <SimpliWeatherTextContainer style={ styles.DailyTemps }>{ props.dailyWeatherData[i].hi }&deg; | { props.dailyWeatherData[i].lo }&deg;</SimpliWeatherTextContainer>
             </View>
             )
         }
@@ -24,12 +26,12 @@ export default function Daily(props) {
 
     return (
         <View style={ styles.DailyWrapper }>
-            <Text style={ styles.DailyHeader }>Daily</Text>
+            <SimpliWeatherTextContainer style={ styles.DailyHeader }>Daily</SimpliWeatherTextContainer>
 
             <View>
-                <ScrollView horizontal>
+                <GestureHandlerScrollView horizontal>
                     { dailyData }
-                </ScrollView>
+                </GestureHandlerScrollView>
             </View>
         </View>
     )
@@ -37,7 +39,7 @@ export default function Daily(props) {
 
 const styles = StyleSheet.create({
     DailyWrapper: {
-        paddingBottom: 10
+        paddingBottom: 10,
     },  
     DailyHeader: {
         fontSize: 30,

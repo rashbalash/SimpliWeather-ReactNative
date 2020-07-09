@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import WeatherIcon from '../WeatherIcon/WeatherIcon';
+import SimpliWeatherTextContainer from '../SimpliWeatherText/SimpliWeatherTextContainer';
 
 export default function CurrentWeather(props) {
     return (
@@ -8,10 +9,10 @@ export default function CurrentWeather(props) {
             
             <View style={ styles.iconAndTemp }>
                 <WeatherIcon icon={props.id} isDay={props.isDay} style={styles.currentWeatherIcon} />
-                <Text style={ styles.CurrentTemp }>{ props.currentTemp }&deg;</Text>
+                <SimpliWeatherTextContainer style={ styles.CurrentTemp }>{ props.currentTemp }&deg;</SimpliWeatherTextContainer>
             </View>
             
-            <Text style={ styles.CurrentDetails }>{ props.currentCondition } | { props.currentHi }&deg; | { props.currentLo }&deg;</Text>
+            <SimpliWeatherTextContainer style={ styles.CurrentDetails }>{ props.currentCondition } | { props.currentHi }&deg; | { props.currentLo }&deg;</SimpliWeatherTextContainer>
         </View>
     )
 }
@@ -20,12 +21,12 @@ const styles = StyleSheet.create({
     CurrentWrapper: {
         // marginTop: 60,
         padding: 20,
-        paddingBottom: 90
+        paddingBottom: 90,
     },
     CurrentDetails: {
         fontSize: 18,
         marginTop: 20,
-        textAlign: "center"
+        textAlign: "center",
     },
     iconAndTemp: {
         display: "flex",

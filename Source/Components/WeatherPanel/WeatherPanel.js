@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 
+import HeaderContainer from '../Header/HeaderContainer';
 import CurrentWeatherContainer from '../CurrentTemperature/CurrentWeatherContainer';
 import DailyWeatherContainer from '../DailyTemperature/DailyWeatherContainer';
 import HourlyWeatherContainer from '../HourlyTemperature/HourlyWeatherContainer';
@@ -11,18 +12,22 @@ import MoreContainer from '../MoreAboutToday/MoreContainer';
 export default function WeatherPanel() {
 
     return (
-        <View>
-            {/* Current */}
-            <CurrentWeatherContainer />
+        <View style={{ width: Dimensions.get('window').width-20 }}>
 
-            {/* Hourly */}
-            <HourlyWeatherContainer />
+                {/* LocationName */}
+                <HeaderContainer />
 
-            {/* Daily */}
-            <DailyWeatherContainer />
+                {/* Current */}
+                <CurrentWeatherContainer />
+            
+                {/* Hourly */}
+                <HourlyWeatherContainer />
 
-            {/* More About Today */}
-            <MoreContainer />
+                {/* Daily */}
+                <DailyWeatherContainer />
+
+                {/* More About Today */}
+                <MoreContainer />
         </View>
     );
 }

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import More from './More';
+import { withTheme } from 'react-native-paper';
 
 const mapStateToProps = (state) => {
     return {
@@ -17,6 +18,6 @@ const mapStateToProps = (state) => {
 
 const MoreContainer = connect(
     mapStateToProps
-)(More);
+)(withTheme(More));
 
 export default MoreContainer;

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Modal, TouchableOpacity, Image, Linking } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Modal, TouchableOpacity, Image, Linking, Dimensions } from 'react-native';
 import { IconButton, Button } from 'react-native-paper';
 import { SocialIcon } from 'react-native-elements';
+import SimpliWeatherTextContainer from '../SimpliWeatherText/SimpliWeatherTextContainer';
+import SimpliWeatherViewContainer from '../SimpliWeatherView/SimpliWeatherViewContainer';
 
 export default function About(props) {
 
@@ -20,11 +22,11 @@ export default function About(props) {
         >
         <ScrollView>
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <SimpliWeatherViewContainer style={styles.modalView}>
          
             
             <View style={ styles.modalHeader}>
-              <Text style={ styles.aboutTitle }>About</Text>
+              <SimpliWeatherTextContainer style={ styles.aboutTitle }>About</SimpliWeatherTextContainer>
               <IconButton
                 icon="close"
                 size={30}
@@ -35,12 +37,12 @@ export default function About(props) {
             </View>
             <Image source={require('./profile.jpg')} style={ styles.aboutImage } />
 
-            <Text style={ styles.aboutDescription }>
+            <SimpliWeatherTextContainer style={ styles.aboutDescription }>
                 Hello! My name is Rashad Balashov, I am the creator and developer of SimpliWeather. 
                 I designed and built SimpliWeather from the ground up with React Native and OpenWeatherMap's API. 
                 I have a deep interest in creating tools and products for people that can better help them in their daily life.
                 Check out the rest of my projects, and if you'd like to contribute to this project, checkout my GitHub as well.
-            </Text>
+            </SimpliWeatherTextContainer>
 
             <View
               style={{
@@ -72,7 +74,7 @@ export default function About(props) {
                 <Image source={require('./email.png')} style={ styles.faLogo } />
               </TouchableOpacity>
             </View>
-          </View>
+          </SimpliWeatherViewContainer>
         </View>
         </ScrollView>
         </Modal>
@@ -103,7 +105,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   aboutImage: {
-    height: 300,
+    height: Dimensions.get('screen').height/2.45,
     maxWidth: '100%',
     borderRadius: 150,
     marginTop: 20,
@@ -117,7 +119,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -135,11 +136,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
   },
   modalText: {
     marginBottom: 15,

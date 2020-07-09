@@ -4,7 +4,7 @@ export const weatherUnit = {
 }
 
 export const theme = {
-    LIGHT: 'light',
-    DARK: 'dark'
+    LIGHT: 'LightTheme',
+    DARK: 'DarkTheme'
 }
 

@@ -1,5 +1,8 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { ScrollView as GestureHandlerScrollView } from 'react-native-gesture-handler';
+import SimpliWeatherTextContainer from '../SimpliWeatherText/SimpliWeatherTextContainer';
+
 import WeatherIcon from '../WeatherIcon/WeatherIcon';
 
 export default function Hourly(props) {
@@ -11,24 +14,24 @@ export default function Hourly(props) {
             hourlyData.push(
                 <View key={i} style={ styles.HourWrapper }>
                     {/* Time */}
-                    <Text style={ styles.HourlyTime }>{ props.hourlyWeatherData[i].hour }:00 { props.hourlyWeatherData[i].amOrPm }</Text>
+                    <SimpliWeatherTextContainer style={ styles.HourlyTime }>{ props.hourlyWeatherData[i].hour }:00 { props.hourlyWeatherData[i].amOrPm }</SimpliWeatherTextContainer>
                     {/* Icon */}
                     <WeatherIcon icon={ props.hourlyWeatherData[i].id } isDay={props.hourlyWeatherData[i].isDay} style={styles.HourlyIcon} />
                     {/* Temperature */}
-                    <Text style={ styles.HourlyTemp }>{ props.hourlyWeatherData[i].temperature }&deg;</Text>
+                    <SimpliWeatherTextContainer style={ styles.HourlyTemp }>{ props.hourlyWeatherData[i].temperature }&deg;</SimpliWeatherTextContainer>
                 </View>
             )
         }
     }
     return (
         <View style={ styles.HourlyWrapper }>
-            <Text style={ styles.HourlyHeader }>Hourly</Text>
+            <SimpliWeatherTextContainer style={ styles.HourlyHeader }>Hourly</SimpliWeatherTextContainer>
 
             {/* Hour */}
             <View>
-                <ScrollView horizontal>
+                <GestureHandlerScrollView horizontal={true}>
                     { hourlyData }
-                </ScrollView>
+                </GestureHandlerScrollView>
             </View>
 
         </View>

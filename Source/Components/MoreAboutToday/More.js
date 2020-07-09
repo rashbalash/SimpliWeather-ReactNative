@@ -1,58 +1,60 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import SimpliWeatherTextContainer from '../SimpliWeatherText/SimpliWeatherTextContainer';
 
 export default function More(props) {
+
     return (
         <View>
-            <Text style={ styles.MoreHeader }>More About Today</Text>
+            <SimpliWeatherTextContainer style={ styles.MoreHeader }>More About Today</SimpliWeatherTextContainer>
 
             <View style={ styles.MoreDetails }>
                 
                 <View>
-                    <Text style={ styles.itemName }>
+                    <SimpliWeatherTextContainer style={ styles.itemName }>
                         Precipitation
-                    </Text>
-                    <Text style={ styles.itemValue }>
+                    </SimpliWeatherTextContainer>
+                    <SimpliWeatherTextContainer style={ styles.itemValue }>
                         { props.precipitation } { props.precipitationUnit }
-                    </Text>
+                    </SimpliWeatherTextContainer>
 
-                    <Text style={ styles.itemName }>
+                    <SimpliWeatherTextContainer style={ styles.itemName }>
                         Sunrise
-                    </Text>
-                    <Text style={ styles.itemValue }>
+                    </SimpliWeatherTextContainer>
+                    <SimpliWeatherTextContainer style={ styles.itemValue }>
                         { props.sunrise } AM
-                    </Text>
+                    </SimpliWeatherTextContainer>
                     
-                    <Text style={ styles.itemName }>
+                    <SimpliWeatherTextContainer style={ styles.itemName }>
                         Wind
-                    </Text>
-                    <Text style={ styles.itemValue }>
+                    </SimpliWeatherTextContainer>
+                    <SimpliWeatherTextContainer style={ styles.itemValue }>
                         { props.wind } { props.windSpeedUnit } { props.windDirection } 
-                    </Text>
+                    </SimpliWeatherTextContainer>
                 </View>
 
                 <View>
 
-                    <Text style={ styles.itemName }>
+                    <SimpliWeatherTextContainer style={ styles.itemName }>
                         Humidity
-                    </Text>
-                    <Text style={ styles.itemValue }>
+                    </SimpliWeatherTextContainer>
+                    <SimpliWeatherTextContainer style={ styles.itemValue }>
                         { props.humidity }% 
-                    </Text>
+                    </SimpliWeatherTextContainer>
 
-                    <Text style={ styles.itemName }>
+                    <SimpliWeatherTextContainer style={ styles.itemName }>
                         Sunset
-                    </Text>
-                    <Text style={ styles.itemValue }>
+                    </SimpliWeatherTextContainer>
+                    <SimpliWeatherTextContainer style={ styles.itemValue }>
                         { props.sunset } PM
-                    </Text>
+                    </SimpliWeatherTextContainer>
 
-                    <Text style={ styles.itemName }>
+                    <SimpliWeatherTextContainer style={ styles.itemName }>
                         Pressure
-                    </Text>
-                    <Text style={ styles.itemValue }>
+                    </SimpliWeatherTextContainer>
+                    <SimpliWeatherTextContainer style={ styles.itemValue }>
                         { props.pressure } hPa
-                    </Text>
+                    </SimpliWeatherTextContainer>
                 </View>                
             </View>
         </View>

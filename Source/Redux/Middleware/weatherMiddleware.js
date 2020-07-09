@@ -63,8 +63,9 @@ function dispatchCurrentData(store, dailyWeatherData) {
 
 function dispatchHourlyData(store, dailyWeatherData) {
 
-    const sunrise = dailyWeatherData.current.sunrise;
-    const sunset =  dailyWeatherData.current.sunset;
+    const currentDaySunrise = dailyWeatherData.current.sunrise;
+    const currentDaySunset =  dailyWeatherData.current.sunset;
+    const nextDaySunrise = dailyWeatherData.daily[1].sunrise;
 
     let hourlyWeatherDataArr = [];
 
@@ -72,7 +73,12 @@ function dispatchHourlyData(store, dailyWeatherData) {
         
         var currentTime = dailyWeatherData.hourly[i].dt
 
-        var isDay = currentTime > sunrise && currentTime < sunset;
+
+        if (currentTime >= nextDaySunrise) {
+            var isDay = true;
+        } else {
+            var isDay = currentTime > currentDaySunrise && currentTime < currentDaySunset;
+        }
 
         var hour = new Date((currentTime) * 1000).getHours();
         
@@ -81,8 +87,6 @@ function dispatchHourlyData(store, dailyWeatherData) {
         hour = hour > 12 ? hour - 12 : hour;
         hour = hour === 0 ? hour + 12 : hour;
         
-        // console.log(idToWeather[dailyWeatherData.hourly[i].weather[0].id]);
-
         hourlyWeatherDataArr.push(
             {
                 hour: hour,
