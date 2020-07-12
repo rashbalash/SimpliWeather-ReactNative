@@ -1,4 +1,4 @@
-import { Animated, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Animated, View, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
 import React, { useRef, useState } from 'react';
 
 import SimpliWeatherTextContainer from '../SimpliWeatherText/SimpliWeatherTextContainer';
@@ -50,10 +50,14 @@ export default function LocationPanelSubmit(props) {
               
               if (isZipCode(submitText)) {
                 props.setLocationZip(parseInt(submitText));
-                props.closeModal();
+                if (!!props.closeModal) {
+                  props.closeModal();
+                }
               } else {
                 props.setLocationCity(submitText);
-                props.closeModal();
+                if (!!props.closeModal) {
+                  props.closeModal();
+                }
               }
             
             } }
@@ -78,7 +82,9 @@ export default function LocationPanelSubmit(props) {
               style={styles.continueButton}
               onPress={ () => {
                 props.getNewLocation();
-                props.closeModal();
+                if (!!props.closeModal) {
+                  props.closeModal();
+                }
               }  }
               >
               <Text style={styles.continueText}>Continue</Text>
@@ -111,6 +117,8 @@ const styles = StyleSheet.create({
       paddingBottom:15,
       backgroundColor:'#ED1C24',
       borderRadius:15,
+      paddingLeft: 110,
+      paddingRight: 110,
       width: '100%',
     },
     continueText:{

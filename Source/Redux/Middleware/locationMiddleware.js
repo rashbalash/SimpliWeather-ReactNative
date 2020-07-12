@@ -26,6 +26,6 @@ export default createLocationMiddleware = store => {
         let location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.Highest});
         store.dispatch(setNewLocation(location.coords));
         store.dispatch(refresh());
-
+        return;
     }
 };
