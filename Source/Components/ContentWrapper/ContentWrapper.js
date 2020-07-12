@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, RefreshControl } from 'react-native';
+import { StyleSheet  } from 'react-native';
 
 import SettingsContainer from '../Settings/SettingsContainer';
 import AppWrapperContainer from '../AppWrapper/AppWrapperContainer';
@@ -11,9 +11,7 @@ export default function ContentWrapper(props) {
 
     return (
         <PaperProvider theme={ props.theme === theme.DARK ? DarkTheme : DefaultTheme } style={ styles.appWrapper }>
-            <ScrollView refreshControl={ <RefreshControl refreshing={ props.refreshing } onRefresh={ props.onRefresh } /> }>
                 <AppWrapperContainer />
-            </ScrollView>
             <SettingsContainer />
         </PaperProvider>
     )

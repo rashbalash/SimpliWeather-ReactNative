@@ -1,4 +1,4 @@
-import { START_APP, SET_STATE, REFRESH, LOADING_SCREEN, SET_NEW_LOCATION, ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_THEME, SET_LOCATION_NAME, SET_CURRENT_WEATHER, SET_MORE_ABOUT_TODAY, SET_HOURLY_WEATHER, SET_DAILY_WEATHER } from '../Actions/Actions';
+import { SET_LOCATION_CITY, SET_LOCATION_ZIP, SET_STATE, REFRESH, LOADING_SCREEN, SET_NEW_LOCATION, ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_THEME, SET_LOCATION_NAME, SET_CURRENT_WEATHER, SET_MORE_ABOUT_TODAY, SET_HOURLY_WEATHER, SET_DAILY_WEATHER, REMOVE_LOCATION } from '../Actions/Actions';
 import {weatherUnit, theme} from '../../Constants';
 
 const windArr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
@@ -9,21 +9,21 @@ function reducer( state={}, action) {
 
         case SET_STATE:
             return {
-                ...action.state
-            }
+                ...action.state.reducer,
+            };
 
         case REFRESH:
             return {
                 ...state,
                 refreshing: true,
-            }
+            };
 
         case LOADING_SCREEN:
 
             return {
                 ...state,
                 loading: true,
-            }
+            };
 
         case SET_NEW_LOCATION:
             return {
@@ -33,6 +33,27 @@ function reducer( state={}, action) {
                     lon: action.location.longitude,
                 }
             };
+
+        case REMOVE_LOCATION:
+            return {
+                ...initialState
+            }
+
+        case SET_LOCATION_CITY:
+            return {
+                ...state,
+                location: {
+                    city: action.cityName,
+                }
+            }
+
+        case SET_LOCATION_ZIP:
+            return {
+                ...state,
+                location: {
+                    zipcode: action.zipcode,
+                }
+            }
 
         case UPDATE_LOCATION:
             return state;
@@ -53,13 +74,12 @@ function reducer( state={}, action) {
         case SET_LOCATION_NAME:
             return {
                 ...state,
-                refreshing: false,
                 location: {
                     lat: action.weatherData.coord.lat,
                     lon: action.weatherData.coord.lon,
                 },
                 locationName: action.weatherData.name,
-            }
+            };
 
         case SET_CURRENT_WEATHER:
             return {
@@ -94,6 +114,7 @@ function reducer( state={}, action) {
 
             return {
                 ...state,
+                refreshing: false,
                 moreAboutToday: {
                     precipitation: action.weatherData.hasOwnProperty('rain') ? Math.round((action.weatherData.rain["1h"]*0.0393701)*10)/10 : 0,
                     precipitationUnit: precipitationUnit,
@@ -116,6 +137,7 @@ export const initialState = {
     locationName: null,
     weatherUnit: weatherUnit.IMPERIAL,
     theme: theme.DARK,
+    locations: [],
     location: { 
         lat: null,
         lon: null,

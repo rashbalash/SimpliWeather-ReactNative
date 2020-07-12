@@ -13,6 +13,9 @@ export const REFRESH = 'REFRESH';
 export const LOADING_SCREEN = 'LOADING_SCREEN';
 export const SET_STATE = 'SET_STATE';
 export const START_APP = 'START_APP';
+export const SET_LOCATION_ZIP = 'SET_LOCATION_ZIP';
+export const SET_LOCATION_CITY = 'SET_LOCATION_City';
+export const REMOVE_LOCATION = 'REMOVE_LOCATION';
 
 // Action Creators
 export function startApp() {
@@ -50,6 +53,26 @@ export function setNewLocation(location) {
     return {
         type: SET_NEW_LOCATION,
         location
+    }
+}
+
+export function setLocationZip(zipcode) {
+    return {
+        type: SET_LOCATION_ZIP,
+        zipcode
+    }
+}
+
+export function setLocationCity(cityName) {
+    return {
+        type: SET_LOCATION_CITY,
+        cityName
+    }
+}
+
+export function removeLocation() {
+    return {
+        type: REMOVE_LOCATION,
     }
 }
 

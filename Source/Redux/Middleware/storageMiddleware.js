@@ -11,11 +11,12 @@ export default createStorageMiddleware = store => next => {
         next(action);
 
         if (action.type == START_APP) {
-            store.dispatch(setState({...initialState, ...retrieveData(stateKey)}));
+            const oldState = await retrieveData(stateKey);
+            store.dispatch(setState({...initialState, ...oldState}));
             return;
         }
 
-        storeData(stateKey, store.getState());
+        await storeData(stateKey, store.getState());
 
         return;
     };
@@ -23,7 +24,7 @@ export default createStorageMiddleware = store => next => {
 
 const storeData = async (key, value) => {
     try {
-      await AsyncStorage.setItem(key, JSON.stringify(value));
+        await AsyncStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       // Error saving data
     }
@@ -31,13 +32,24 @@ const storeData = async (key, value) => {
 
 const retrieveData = async (key) => {
     try {
-        const value = await AsyncStorage.getItem(key);
-        value = JSON.parse(value);
+        const value = JSON.parse(await AsyncStorage.getItem(key));
+
         if (value !== null) {
-            // We have data!!
-            console.log(value);
+            return value;
         }
     } catch (error) {
         // Error retrieving data
     }
 };
+
+// const addLocation = async (key) => {
+//     try {
+//         const value = await AsyncStorage.getItem(key);
+
+//         if (value !== null) {
+//             console.log(value);
+//         }
+//     } catch (error) {
+//         // Could Not Store Location
+//     }
+// }

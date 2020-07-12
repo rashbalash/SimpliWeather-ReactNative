@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Settings from './Settings';
-import { changeUnits, changeTheme } from '../../Redux/Actions/Actions';
+import { changeUnits, changeTheme, removeLocation } from '../../Redux/Actions/Actions';
+import { withTheme } from 'react-native-paper';
 
 const mapStateToProps = (state) => {
     return {
@@ -17,12 +18,15 @@ const mapDispatchToProps = (dispatch) => {
         onThemeChange: () => {
             dispatch(changeTheme());
         },
+        removeLocation: () => {
+            dispatch(removeLocation());
+        }
     }
 }
 
 const SettingsContainer = connect(
     mapStateToProps, 
     mapDispatchToProps
-)(Settings);
+)(withTheme(Settings));
 
 export default SettingsContainer;

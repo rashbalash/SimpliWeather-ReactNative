@@ -6,7 +6,7 @@ import ContentWrapperContainer from './Source/Components/ContentWrapper/ContentW
 
 export default function App() {  
   return (
-    <Provider store={store} style={{backgroundColor: 'black'}}>
+    <Provider store={store}>
       <ContentWrapperContainer />
     </Provider>
   );

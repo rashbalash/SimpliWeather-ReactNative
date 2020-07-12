@@ -39,7 +39,7 @@ export default function Daily(props) {
 
 const styles = StyleSheet.create({
     DailyWrapper: {
-        paddingBottom: 10,
+        paddingBottom: 20,
     },  
     DailyHeader: {
         fontSize: 30,

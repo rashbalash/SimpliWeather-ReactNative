@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Modal, TouchableOpacity, Image, Linking, Dimensions } from 'react-native';
-import { IconButton, Button } from 'react-native-paper';
-import { SocialIcon } from 'react-native-elements';
+import React from 'react';
+import { ScrollView, StyleSheet, View, Modal, TouchableOpacity, Image, Linking, Dimensions } from 'react-native';
+import { IconButton, useTheme } from 'react-native-paper';
 import SimpliWeatherTextContainer from '../SimpliWeatherText/SimpliWeatherTextContainer';
 import SimpliWeatherViewContainer from '../SimpliWeatherView/SimpliWeatherViewContainer';
 
@@ -10,6 +9,12 @@ export default function About(props) {
     const FALink = 'https://fracturedaperture.com/';
     const GithubLink = 'https://github.com/rashbalash';
     const LinkedinLink = 'https://www.linkedin.com/in/rashadbalashov/';
+
+    const FALogoLight = require('./FALogoLight.png');
+    const FALogoDark = require('./FALogoDark.png');
+
+    const { colors } = useTheme();
+    const FALogo = colors.text === '#ffffff' ? FALogoDark : FALogoLight;
 
     return (
         
@@ -56,23 +61,11 @@ export default function About(props) {
 
             <View style={ styles.socialIcons }>
               <TouchableOpacity onPress={() => Linking.openURL(FALink)}>
-                <Image source={require('./FALogo.jpg')} style={ styles.faLogo } />
+                <Image source={FALogo} style={ styles.faLogo } />
               </TouchableOpacity>
-              <SocialIcon
-                onPress={() => Linking.openURL(GithubLink)}
-                raised={false}
-                type='github'
-                style={ styles.iconStyle }
-              />
-              <SocialIcon
-                onPress={() => Linking.openURL(LinkedinLink)}
-                raised={false}
-                type='linkedin'
-                style={ styles.iconStyle }
-              />
-              <TouchableOpacity onPress={() => Linking.openURL('mailto:rashad.balashov@gmail.com')}>
-                <Image source={require('./email.png')} style={ styles.faLogo } />
-              </TouchableOpacity>
+              <IconButton icon={'git'} size={35} onPress={() => Linking.openURL(GithubLink)} />
+              <IconButton icon={'linkedin'} size={35} onPress={() => Linking.openURL(LinkedinLink)} />
+              <IconButton icon={'gmail'} size={35} onPress={() => Linking.openURL('mailto:rashad.balashov@gmail.com')} />
             </View>
           </SimpliWeatherViewContainer>
         </View>
@@ -88,7 +81,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     minWidth: "100%",
-
   },
   closeButton: {
     position: 'absolute',
@@ -151,8 +143,8 @@ const styles = StyleSheet.create({
     marginTop: 0
   },
   faLogo: {
-    height: 52,
-    width: 52,
+    height: 35,
+    width: 35,
     borderRadius: 50,
     marginLeft: 7,
     marginRight: 7,

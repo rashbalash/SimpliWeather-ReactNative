@@ -1,18 +1,14 @@
-import React, { useRef, useEffect } from 'react';
-
-import { Animated, View, Modal, Button, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
-import store from '../../Redux/CreateStore';
-
-import { getNewLocation } from '../../Redux/Actions/Actions';
-import SimpliWeatherTextContainer from '../SimpliWeatherText/SimpliWeatherTextContainer';
+import React, { useRef } from 'react';
+import { Animated, View, Modal, StyleSheet, Text, KeyboardAvoidingView } from 'react-native';
 import WeatherIcon from '../WeatherIcon/WeatherIcon';
+import LocationPanelSubmitContainer from '../LocationPanelSubmit/LocationPanelSubmitContainer';
 
 export default function LocationPanel(props) {
 
     const modalVisible = props.locationName === null ? true : false;
     const backgroundColor = props.style.backgroundColor;
     const fontColor = props.style.color;
-        
+    
     const FadeInView = (props) => {
       const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
     
@@ -61,39 +57,17 @@ export default function LocationPanel(props) {
         </Animated.View>
       );
     }
-    const FadeInViewThree = (props) => {
-      const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
-    
-      React.useEffect(() => {
-        Animated.timing(
-          fadeAnim,
-          {
-            toValue: 1,
-            duration: 2000,
-          }
-        ).start();
-      }, [])
-    
-      return (
-        <Animated.View                 // Special animatable View
-          style={{
-            ...props.style,
-            opacity: fadeAnim,         // Bind opacity to animated value
-          }}
-        >
-          {props.children}
-        </Animated.View>
-      );
-    }
 
-
-    return(
-      <View>
+    return(       
         <Modal animationType="slide"
                 visible={modalVisible}
                 presentationStyle={"overFullScreen"}
-                
+                transparent
                 statusBarTranslucent
+        >          
+        <KeyboardAvoidingView 
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        style={{flex: 1}}
         >
           <View style={ [styles.centeredView, { backgroundColor: backgroundColor }]}>
             <FadeInView>
@@ -106,25 +80,12 @@ export default function LocationPanel(props) {
               <WeatherIcon icon={'clear'} isDay={false} style={{ width: 150, height: 150 }}/>
             </FadeInViewTwo>
 
-            <View>
-              <FadeInViewTwo style={ styles.currentLocationView }>
-                <SimpliWeatherTextContainer style= { styles.panelContext } >Allow SimpliWeather to use your location</SimpliWeatherTextContainer>
-                
-                <TouchableOpacity
-                  style={styles.continueButton}
-                  onPress={ () => store.dispatch(getNewLocation()) }
-                  >
-                  <Text style={styles.continueText}>Continue</Text>
-                </TouchableOpacity>
-              </FadeInViewTwo>
-
-              <FadeInViewThree>
-                  <TouchableOpacity style={ styles.cityOrZipcodeContainer}><Text style={{ color: '#ED1C24', fontSize: 16 }}>Use City Name or Zipcode</Text></TouchableOpacity>
-              </FadeInViewThree>
-            </View>
-        </View>
-      </Modal>
-    </View>
+            <FadeInViewTwo>
+              <LocationPanelSubmitContainer />
+            </FadeInViewTwo>
+          </View>
+          </KeyboardAvoidingView>
+        </Modal>
   );
 }
 
@@ -132,7 +93,7 @@ const styles = StyleSheet.create({
     panelTitle: {
       fontSize: 46,
       textAlign: "center",
-      paddingTop: 40
+      paddingTop: 30
     },
     centeredView: {
       flex: 1,
@@ -141,33 +102,5 @@ const styles = StyleSheet.create({
       justifyContent: "space-between",
       width: '100%',
       paddingBottom: 10
-    },
-    panelContext: {
-      fontSize: 24,
-      textAlign: "center",
-      alignItems: "center",
-      width: 300,
-    },
-    currentLocationView: {
-      alignItems: "center",
-    },
-    continueButton:{
-      marginTop:10,
-      paddingTop:15,
-      paddingBottom:15,
-      backgroundColor:'#ED1C24',
-      borderRadius:15,
-    },
-    continueText:{
-      color:'#fff',
-      textAlign:'center',
-      fontSize: 22,
-      paddingLeft : 110,
-      paddingRight : 105    
-    },
-    cityOrZipcodeContainer: {
-      marginTop: 10,
-      alignItems: "center",
-    },
-
+    }
 });

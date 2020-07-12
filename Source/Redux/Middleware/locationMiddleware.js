@@ -1,4 +1,4 @@
-import { GET_NEW_LOCATION, setNewLocation, refresh } from '../Actions/Actions';
+import { GET_NEW_LOCATION, setNewLocation, refresh, SET_LOCATION_ZIP, SET_LOCATION_CITY } from '../Actions/Actions';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
@@ -8,7 +8,12 @@ export default createLocationMiddleware = store => {
 
         next(action);
 
-        if (action.type !== GET_NEW_LOCATION) {
+        console.log(action.type);
+
+        if (action.type === SET_LOCATION_ZIP || action.type === SET_LOCATION_CITY) {
+            store.dispatch(refresh());
+            return;
+        } else if (action.type !== GET_NEW_LOCATION) {
             return;
         }
 
