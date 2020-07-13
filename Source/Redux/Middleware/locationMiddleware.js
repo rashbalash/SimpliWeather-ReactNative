@@ -8,8 +8,6 @@ export default createLocationMiddleware = store => {
 
         next(action);
 
-        console.log(action.type);
-
         if (action.type === SET_LOCATION_ZIP || action.type === SET_LOCATION_CITY) {
             store.dispatch(refresh());
             return;

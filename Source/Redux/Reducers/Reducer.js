@@ -8,9 +8,16 @@ function reducer( state={}, action) {
     switch(action.type) {
 
         case SET_STATE:
-            return {
-                ...action.state.reducer,
-            };
+
+            if (!action.state.reducer.locationName) {
+                return {
+                    ...initialState
+                };
+            } else {
+                return {
+                    ...action.state.reducer,
+                };
+            }
 
         case REFRESH:
             return {
@@ -88,7 +95,6 @@ function reducer( state={}, action) {
             };
 
         case SET_HOURLY_WEATHER:
-
             return {
                 ...state,
                 hourlyWeatherData: action.hourlyWeatherData,
@@ -134,10 +140,10 @@ function reducer( state={}, action) {
 }
 
 export const initialState = {
+    allLocations: [],
     locationName: null,
     weatherUnit: weatherUnit.IMPERIAL,
     theme: theme.DARK,
-    locations: [],
     location: { 
         lat: null,
         lon: null,
@@ -147,10 +153,6 @@ export const initialState = {
     geocode:null,
     errorMessage:"",
     currentWeather: {
-    },
-    hourlyWeather: {
-    },
-    dailyWeather: {
     },
     moreAboutToday: {
     },

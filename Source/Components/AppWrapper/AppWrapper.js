@@ -1,7 +1,28 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text, StatusBar, RefreshControl } from 'react-native';
+import { ScrollView, StyleSheet, View, Text, StatusBar, RefreshControl, Dimensions } from 'react-native';
 import WeatherPanel from '../WeatherPanel/WeatherPanel';
 import LocationPanelContainer from '../LocationPanel/LocationPanelContainer';
+
+const Pages = (hourlyWeatherData) => {
+
+  const weatherPanels = [];
+
+  for (let i = 0; i < 3; ++i) {
+    weatherPanels.push (
+      <View key={i}>
+        <WeatherPanel />
+      </View>
+    )
+  }  
+  
+  return weatherPanels;
+}
+
+const PageNum = (event) => {
+  const page = Math.round(parseFloat(event.nativeEvent.contentOffset.x/Dimensions.get('window').width));
+  console.log(page);
+  return page;
+}
 
 export default function AppWrapper(props) {
 
@@ -13,18 +34,21 @@ export default function AppWrapper(props) {
       <ScrollView style={{ backgroundColor: barColor }} refreshControl={ <RefreshControl tintColor="red" refreshing={ props.refreshing } onRefresh={ props.onRefresh } /> }>
         <View style={ [styles.contentWrapper, { backgroundColor: colors.background }] }>
             <StatusBar barStyle={barTextColor} backgroundColor={barColor} translucent={true} />
-            {/* Title and Location Name */}
-            {/* <TitleContainer /> */}
+
             <View style={ styles.HeaderWrapper}>
               <Text style={ [styles.HeaderTitle, { color: colors.text }] }>SimpliWeather</Text>
             </View>
+
             <ScrollView 
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               pagingEnabled
+              onScroll={ (e) => PageNum(e) }
+              scrollEventThrottle={0}
             >
-              <WeatherPanel />
-              <WeatherPanel />
+
+              <Pages hourlyWeatherData={props.hourlyWeatherData} /> 
+            
             </ScrollView>
         
             <LocationPanelContainer style={ {backgroundColor: colors.background, color: colors.text } } isModalOpen={ props.locationName } />

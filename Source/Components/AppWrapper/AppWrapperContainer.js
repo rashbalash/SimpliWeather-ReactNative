@@ -6,7 +6,9 @@ import { refresh } from '../../Redux/Actions/Actions';
 const mapStateToProps = (state) => {
     return {
         locationName: state.reducer.locationName,
-        refreshing: state.reducer.refreshing
+        refreshing: state.reducer.refreshing,
+        dailyWeatherData: state.reducer.dailyWeatherData,
+        hourlyWeatherData: state.reducer.hourlyWeatherData,
     };
 };
 

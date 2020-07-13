@@ -33,7 +33,6 @@ export default function LocationPanelSubmit(props) {
           </Animated.View>
         );
     }
-
     const isZipCode = (submitText) => {
       return !isNaN(parseInt(submitText));
     }
@@ -82,9 +81,6 @@ export default function LocationPanelSubmit(props) {
               style={styles.continueButton}
               onPress={ () => {
                 props.getNewLocation();
-                if (!!props.closeModal) {
-                  props.closeModal();
-                }
               }  }
               >
               <Text style={styles.continueText}>Continue</Text>

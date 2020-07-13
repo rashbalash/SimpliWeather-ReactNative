@@ -13,21 +13,20 @@ export default function WeatherPanel() {
 
     return (
         <View style={{ width: Dimensions.get('window').width-20 }}>
+            {/* LocationName */}
+            <HeaderContainer />
 
-                {/* LocationName */}
-                <HeaderContainer />
+            {/* Current */}
+            <CurrentWeatherContainer />
+        
+            {/* Hourly */}
+            <HourlyWeatherContainer />
 
-                {/* Current */}
-                <CurrentWeatherContainer />
-            
-                {/* Hourly */}
-                <HourlyWeatherContainer />
+            {/* Daily */}
+            <DailyWeatherContainer />
 
-                {/* Daily */}
-                <DailyWeatherContainer />
-
-                {/* More About Today */}
-                <MoreContainer />
+            {/* More About Today */}
+            <MoreContainer />
         </View>
     );
 }

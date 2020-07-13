@@ -5,7 +5,7 @@ import { initialState } from '../Reducers/Reducer';
 const stateKey = 'New State';
 
 export default createStorageMiddleware = store => next => {   
-
+    
     return async (action) => {
         // update the state first
         next(action);
