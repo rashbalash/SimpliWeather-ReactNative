@@ -1,20 +1,23 @@
 import { connect } from 'react-redux';
 import AppWrapper from './AppWrapper';
 import { withTheme } from 'react-native-paper';
-import { refresh } from '../../Redux/Actions/Actions';
+import { refresh, setCurrentPage } from '../../Redux/Actions/Actions';
+import { Dimensions } from 'react-native';
 
 const mapStateToProps = (state) => {
     return {
         locationName: state.reducer.locationName,
         refreshing: state.reducer.refreshing,
-        dailyWeatherData: state.reducer.dailyWeatherData,
-        hourlyWeatherData: state.reducer.hourlyWeatherData,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onRefresh: () => dispatch(refresh())
+        onRefresh: () => dispatch(refresh()),
+        setCurrentPage: (event) => {
+            const page = Math.round(parseFloat(event.nativeEvent.contentOffset.x/Dimensions.get('window').width));
+            dispatch(setCurrentPage(page));
+        }
     }
 };
 

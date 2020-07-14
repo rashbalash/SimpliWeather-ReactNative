@@ -16,6 +16,7 @@ export const START_APP = 'START_APP';
 export const SET_LOCATION_ZIP = 'SET_LOCATION_ZIP';
 export const SET_LOCATION_CITY = 'SET_LOCATION_City';
 export const REMOVE_LOCATION = 'REMOVE_LOCATION';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
 // Action Creators
 export function startApp() {
@@ -124,5 +125,12 @@ export function setMoreAboutToday(weatherData) {
     return {
         type: SET_MORE_ABOUT_TODAY,
         weatherData
+    }
+}
+
+export function setCurrentPage(currentPage) {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage
     }
 }

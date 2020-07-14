@@ -14,8 +14,6 @@ import SimpliWeatherViewContainer from '../SimpliWeatherView/SimpliWeatherViewCo
 import LocationPanelSubmitContainer from '../LocationPanelSubmit/LocationPanelSubmitContainer';
 
 export default function AddNewLocation(props) {
-    const modalVisible = props.locationName === null ? true : false;
-    
     return (
         <Modal
             animationType="slide"

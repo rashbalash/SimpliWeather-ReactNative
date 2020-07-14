@@ -81,7 +81,7 @@ export default function LocationPanel(props) {
             </FadeInViewTwo>
 
             <FadeInViewTwo>
-              <LocationPanelSubmitContainer />
+              <LocationPanelSubmitContainer modalVisible={modalVisible} />
             </FadeInViewTwo>
           </View>
           </KeyboardAvoidingView>

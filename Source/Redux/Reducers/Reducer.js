@@ -1,4 +1,4 @@
-import { SET_LOCATION_CITY, SET_LOCATION_ZIP, SET_STATE, REFRESH, LOADING_SCREEN, SET_NEW_LOCATION, ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_THEME, SET_LOCATION_NAME, SET_CURRENT_WEATHER, SET_MORE_ABOUT_TODAY, SET_HOURLY_WEATHER, SET_DAILY_WEATHER, REMOVE_LOCATION } from '../Actions/Actions';
+import { SET_CURRENT_PAGE, SET_LOCATION_CITY, SET_LOCATION_ZIP, SET_STATE, REFRESH, LOADING_SCREEN, SET_NEW_LOCATION, ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_THEME, SET_LOCATION_NAME, SET_CURRENT_WEATHER, SET_MORE_ABOUT_TODAY, SET_HOURLY_WEATHER, SET_DAILY_WEATHER, REMOVE_LOCATION } from '../Actions/Actions';
 import {weatherUnit, theme} from '../../Constants';
 
 const windArr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
@@ -134,6 +134,12 @@ function reducer( state={}, action) {
                 },
             };
 
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+
         default:
             return state;
     }
@@ -141,6 +147,7 @@ function reducer( state={}, action) {
 
 export const initialState = {
     allLocations: [],
+    currentPage: null,
     locationName: null,
     weatherUnit: weatherUnit.IMPERIAL,
     theme: theme.DARK,

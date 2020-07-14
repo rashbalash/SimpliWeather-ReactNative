@@ -3,11 +3,11 @@ import { ScrollView, StyleSheet, View, Text, StatusBar, RefreshControl, Dimensio
 import WeatherPanel from '../WeatherPanel/WeatherPanel';
 import LocationPanelContainer from '../LocationPanel/LocationPanelContainer';
 
-const Pages = (hourlyWeatherData) => {
+const Pages = () => {
 
   const weatherPanels = [];
 
-  for (let i = 0; i < 3; ++i) {
+  for (let i = 0; i < 2; ++i) {
     weatherPanels.push (
       <View key={i}>
         <WeatherPanel />
@@ -16,12 +16,6 @@ const Pages = (hourlyWeatherData) => {
   }  
   
   return weatherPanels;
-}
-
-const PageNum = (event) => {
-  const page = Math.round(parseFloat(event.nativeEvent.contentOffset.x/Dimensions.get('window').width));
-  console.log(page);
-  return page;
 }
 
 export default function AppWrapper(props) {
@@ -43,7 +37,7 @@ export default function AppWrapper(props) {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               pagingEnabled
-              onScroll={ (e) => PageNum(e) }
+              onScroll={ (e) => props.setCurrentPage(e) }
               scrollEventThrottle={0}
             >
 

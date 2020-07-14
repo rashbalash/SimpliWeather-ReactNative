@@ -81,6 +81,9 @@ export default function LocationPanelSubmit(props) {
               style={styles.continueButton}
               onPress={ () => {
                 props.getNewLocation();
+                if (!!props.closeModal) {
+                  props.closeModal();
+                }
               }  }
               >
               <Text style={styles.continueText}>Continue</Text>

@@ -3,12 +3,12 @@
     "name": "SimpliWeather",
     "slug": "SimpliWeather",
     "ios": {
-      "bundleIdentifier": "SimpliWeather.com",
+      "bundleIdentifier": "com.SimpliWeather",
       "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
-      "package": "SimpliWeather.com",
+      "package": "com.SimpliWeather",
       "versionCode": 1
     },
     "platforms": [

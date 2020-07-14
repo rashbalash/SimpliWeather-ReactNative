@@ -13,6 +13,7 @@ export default createStorageMiddleware = store => next => {
         if (action.type == START_APP) {
             const oldState = await retrieveData(stateKey);
             store.dispatch(setState({...initialState, ...oldState}));
+            store.dispatch(refresh());
             return;
         }
 
@@ -41,15 +42,3 @@ const retrieveData = async (key) => {
         // Error retrieving data
     }
 };
-
-// const addLocation = async (key) => {
-//     try {
-//         const value = await AsyncStorage.getItem(key);
-
-//         if (value !== null) {
-//             console.log(value);
-//         }
-//     } catch (error) {
-//         // Could Not Store Location
-//     }
-// }
