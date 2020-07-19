@@ -34,9 +34,13 @@ function reducer( state={}, action) {
                 return newLocationArr;
             }, []);
 
+            let newCurrentPage = (action.currentPage >= newLocations.length) ? action.currentPage - 1 : action.currentPage; 
+            newCurrentPage = newCurrentPage < 0 ? 0 : newCurrentPage; 
+
             return {
                 ...state,
-                allLocations: newLocations
+                allLocations: newLocations,
+                currentPage: newCurrentPage,
             }
 
         case SET_NEW_LOCATION:

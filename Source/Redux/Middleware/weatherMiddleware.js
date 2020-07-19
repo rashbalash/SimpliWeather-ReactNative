@@ -138,19 +138,17 @@ function dispatchMoreAboutToday(store, weatherData, currentPage) {
     sunsetHour = sunsetHour === 0 ? sunsetHour + 12 : sunsetHour;
     const sunset = sunsetHour > 12 ? (sunsetHour - 12)  + `:` + new Date(weatherData.sys.sunset * 1000).getMinutes(): sunsetHour  + `:` + new Date(weatherData.sys.sunset * 1000).getMinutes();
 
-    const moreAboutTodayArr = [
-        {
-            precipitation: weatherData.hasOwnProperty('rain') ? Math.round((weatherData.rain["1h"]*0.0393701)*10)/10 : 0,
-            precipitationUnit: precipitationUnit,
-            humidity: Math.round(weatherData.main.humidity),
-            sunrise: sunrise,
-            sunset: sunset,
-            wind: Math.round(weatherData.wind.speed),
-            windSpeedUnit: windSpeedUnit,
-            windDirection: windArr[weatherData.wind.deg%8],
-            pressure: weatherData.main.pressure
-        }
-    ];
+    const moreAboutTodayArr = {
+        precipitation: weatherData.hasOwnProperty('rain') ? Math.round((weatherData.rain["1h"]*0.0393701)*10)/10 : 0,
+        precipitationUnit: precipitationUnit,
+        humidity: Math.round(weatherData.main.humidity),
+        sunrise: sunrise,
+        sunset: sunset,
+        wind: Math.round(weatherData.wind.speed),
+        windSpeedUnit: windSpeedUnit,
+        windDirection: windArr[weatherData.wind.deg%8],
+        pressure: weatherData.main.pressure
+    };
 
     store.dispatch(setMoreAboutToday(moreAboutTodayArr, currentPage))
 }

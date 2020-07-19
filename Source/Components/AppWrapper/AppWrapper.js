@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text, StatusBar, RefreshControl, Dimensions } from 'react-native';
+import { ScrollView, StyleSheet, View, Text, StatusBar, RefreshControl } from 'react-native';
 import WeatherPanel from '../WeatherPanel/WeatherPanel';
 import LocationPanelContainer from '../LocationPanel/LocationPanelContainer';
 

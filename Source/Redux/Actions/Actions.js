@@ -121,10 +121,10 @@ export function setDailyWeather(dailyWeatherData, currentPage) {
     }
 }
 
-export function setMoreAboutToday(weatherData, currentPage) {
+export function setMoreAboutToday(moreAboutToday, currentPage) {
     return {
         type: SET_MORE_ABOUT_TODAY,
-        weatherData,
+        moreAboutToday,
         currentPage
     }
 }
