@@ -2,31 +2,31 @@ import React from 'react';
 
 import { View, Dimensions } from 'react-native';
 
-import HeaderContainer from '../Header/HeaderContainer';
-import CurrentWeatherContainer from '../CurrentTemperature/CurrentWeatherContainer';
-import DailyWeatherContainer from '../DailyTemperature/DailyWeatherContainer';
-import HourlyWeatherContainer from '../HourlyTemperature/HourlyWeatherContainer';
-import MoreContainer from '../MoreAboutToday/MoreContainer';
+import Header from '../Header/Header';
+import CurrentWeather from '../CurrentTemperature/CurrentWeather';
+import DailyWeather from '../DailyTemperature/DailyWeather';
+import HourlyWeather from '../HourlyTemperature/HourlyWeather';
+import More from '../MoreAboutToday/More';
 
 
-export default function WeatherPanel() {
+export default function WeatherPanel(props) {
 
     return (
         <View style={{ width: Dimensions.get('window').width-20 }}>
             {/* LocationName */}
-            <HeaderContainer />
+            <Header locationName={props.location.name} />
 
             {/* Current */}
-            <CurrentWeatherContainer />
-        
+            <CurrentWeather {...props.location.currentWeather} />
+            
             {/* Hourly */}
-            <HourlyWeatherContainer />
+            <HourlyWeather hourlyWeatherData={props.location.hourlyWeatherData} />
 
             {/* Daily */}
-            <DailyWeatherContainer />
+            <DailyWeather dailyWeatherData={props.location.dailyWeatherData} />
 
             {/* More About Today */}
-            <MoreContainer />
+            <More {...props.location.moreAboutToday} />
         </View>
     );
 }

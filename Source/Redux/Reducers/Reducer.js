@@ -1,22 +1,15 @@
-import { SET_CURRENT_PAGE, SET_LOCATION_CITY, SET_LOCATION_ZIP, SET_STATE, REFRESH, LOADING_SCREEN, SET_NEW_LOCATION, ADD_NEW_LOCATION, UPDATE_LOCATION, CHANGE_UNITS, CHANGE_THEME, SET_LOCATION_NAME, SET_CURRENT_WEATHER, SET_MORE_ABOUT_TODAY, SET_HOURLY_WEATHER, SET_DAILY_WEATHER, REMOVE_LOCATION } from '../Actions/Actions';
+import { SET_CURRENT_PAGE, SET_LOCATION_CITY, SET_LOCATION_ZIP, SET_STATE, REFRESH, LOADING_SCREEN, SET_NEW_LOCATION, ADD_NEW_LOCATION, CHANGE_UNITS, CHANGE_THEME, SET_LOCATION_NAME, SET_CURRENT_WEATHER, SET_MORE_ABOUT_TODAY, SET_HOURLY_WEATHER, SET_DAILY_WEATHER, REMOVE_LOCATION } from '../Actions/Actions';
 import {weatherUnit, theme} from '../../Constants';
 
-const windArr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-
 function reducer( state={}, action) {
+
+    let newLocation, newLocations;
 
     switch(action.type) {
 
         case SET_STATE:
-
-            if (!action.state.reducer.locationName) {
-                return {
-                    ...initialState
-                };
-            } else {
-                return {
-                    ...action.state.reducer,
-                };
+            return {
+                ...initialState, ...action.state.reducer
             }
 
         case REFRESH:
@@ -32,38 +25,53 @@ function reducer( state={}, action) {
                 loading: true,
             };
 
-        case SET_NEW_LOCATION:
+        case REMOVE_LOCATION:
+                        
+            newLocations = state.allLocations.reduce( (newLocationArr, oneLocation, index) => {
+                if (index !== action.currentPage) {
+                    newLocationArr.push(oneLocation);
+                }
+                return newLocationArr;
+            }, []);
+
             return {
                 ...state,
-                location: {
-                    lat: action.location.latitude,
-                    lon: action.location.longitude,
-                }
-            };
-
-        case REMOVE_LOCATION:
-            return {
-                ...initialState
+                allLocations: newLocations
             }
 
-        case SET_LOCATION_CITY:
+        case SET_NEW_LOCATION:
+
+            newLocation = {
+                lat: action.location.latitude,
+                lon: action.location.longitude,
+            };
+
             return {
                 ...state,
-                location: {
-                    city: action.cityName,
-                }
+                allLocations: [...state.allLocations, newLocation]
+            };
+
+        case SET_LOCATION_CITY:
+
+            newLocation = {
+                city: action.cityName,
+            };
+
+            return {
+                ...state,
+                allLocations: [...state.allLocations, newLocation],
             }
 
         case SET_LOCATION_ZIP:
+
+            newLocation = {
+                zipcode: action.zipcode,
+            };
+
             return {
                 ...state,
-                location: {
-                    zipcode: action.zipcode,
-                }
+                allLocations: [...state.allLocations, newLocation],
             }
-
-        case UPDATE_LOCATION:
-            return state;
 
         case CHANGE_UNITS:
             return {
@@ -79,59 +87,101 @@ function reducer( state={}, action) {
             };
         
         case SET_LOCATION_NAME:
+
+            newLocations = state.allLocations.reduce( (newLocationArr, oneLocation, index) => {
+                if (index !== action.currentPage) {
+                    newLocationArr.push(oneLocation);
+                } else {
+                    newLocationArr.push({
+                        ...oneLocation,
+                        name: action.weatherData.name,
+                        lat: action.weatherData.coord.lat,
+                        lon: action.weatherData.coord.lon,
+                    })
+                }
+                return newLocationArr;
+            }, []);
+
             return {
                 ...state,
-                location: {
-                    lat: action.weatherData.coord.lat,
-                    lon: action.weatherData.coord.lon,
-                },
-                locationName: action.weatherData.name,
+                allLocations: newLocations,
             };
 
         case SET_CURRENT_WEATHER:
+
+            newLocations = state.allLocations.reduce( (newLocationArr, oneLocation, index) => {
+                if (index !== action.currentPage) {
+                    newLocationArr.push(oneLocation);
+                } else {
+                    newLocationArr.push({
+                        ...oneLocation,
+                        currentWeather: action.currentWeather
+                    })
+                }
+                return newLocationArr;
+            }, []);
+
             return {
                 ...state,
-                currentWeather: action.currentWeather
+                allLocations: newLocations,
             };
 
         case SET_HOURLY_WEATHER:
+
+            newLocations = state.allLocations.reduce( (newLocationArr, oneLocation, index) => {
+                if (index !== action.currentPage) {
+                    newLocationArr.push(oneLocation);
+                } else {
+                    newLocationArr.push({
+                        ...oneLocation,
+                        hourlyWeatherData: action.hourlyWeatherData,
+                    })
+                }
+                return newLocationArr;
+            }, []);
+
             return {
                 ...state,
-                hourlyWeatherData: action.hourlyWeatherData,
+                allLocations: newLocations,
             };
 
         case SET_DAILY_WEATHER:
-            
+
+            newLocations = state.allLocations.reduce( (newLocationArr, oneLocation, index) => {
+                if (index !== action.currentPage) {
+                    newLocationArr.push(oneLocation);
+                } else {
+                    newLocationArr.push({
+                        ...oneLocation,
+                        dailyWeatherData: action.dailyWeatherData,
+                    })
+                }
+                return newLocationArr;
+            }, []);
+
             return {
                 ...state,
-                dailyWeatherData: action.dailyWeatherData,
+                allLocations: newLocations,
             };
 
         case SET_MORE_ABOUT_TODAY:
 
-            const precipitationUnit = state.weatherUnit === weatherUnit.IMPERIAL ? `Inches` : `Centimeters`;
-            const windSpeedUnit = state.weatherUnit === weatherUnit.IMPERIAL ? `mph` : `kmh`;
-
-            var sunrise = new Date(action.weatherData.sys.sunrise * 1000).getHours() + `:` + new Date(action.weatherData.sys.sunrise * 1000).getMinutes();
-            var sunsetHour = new Date(action.weatherData.sys.sunset * 1000).getHours();
-
-            sunsetHour = sunsetHour === 0 ? sunsetHour + 12 : sunsetHour;
-            var sunset = sunsetHour > 12 ? (sunsetHour - 12)  + `:` + new Date(action.weatherData.sys.sunset * 1000).getMinutes(): sunsetHour  + `:` + new Date(action.weatherData.sys.sunset * 1000).getMinutes();
+            newLocations = state.allLocations.reduce( (newLocationArr, oneLocation, index) => {
+                if (index !== action.currentPage) {
+                    newLocationArr.push(oneLocation);
+                } else {
+                    newLocationArr.push({
+                        ...oneLocation,
+                        moreAboutToday: action.moreAboutToday,
+                    })
+                }
+                return newLocationArr;
+            }, []);
 
             return {
                 ...state,
                 refreshing: false,
-                moreAboutToday: {
-                    precipitation: action.weatherData.hasOwnProperty('rain') ? Math.round((action.weatherData.rain["1h"]*0.0393701)*10)/10 : 0,
-                    precipitationUnit: precipitationUnit,
-                    humidity: Math.round(action.weatherData.main.humidity),
-                    sunrise: sunrise,
-                    sunset: sunset,
-                    wind: Math.round(action.weatherData.wind.speed),
-                    windSpeedUnit: windSpeedUnit,
-                    windDirection: windArr[action.weatherData.wind.deg%8],
-                    pressure: action.weatherData.main.pressure,
-                },
+                allLocations: newLocations,
             };
 
         case SET_CURRENT_PAGE:
@@ -147,22 +197,9 @@ function reducer( state={}, action) {
 
 export const initialState = {
     allLocations: [],
-    currentPage: null,
-    locationName: null,
+    currentPage: 0,
     weatherUnit: weatherUnit.IMPERIAL,
     theme: theme.DARK,
-    location: { 
-        lat: null,
-        lon: null,
-        zipcode: null,
-        city: null
-    },
-    geocode:null,
-    errorMessage:"",
-    currentWeather: {
-    },
-    moreAboutToday: {
-    },
     refreshing: false,
     loading: false
 }

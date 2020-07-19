@@ -5,9 +5,10 @@ import { refresh, setCurrentPage } from '../../Redux/Actions/Actions';
 import { Dimensions } from 'react-native';
 
 const mapStateToProps = (state) => {
+
     return {
-        locationName: state.reducer.locationName,
         refreshing: state.reducer.refreshing,
+        allLocations: state.reducer.allLocations,
     };
 };
 

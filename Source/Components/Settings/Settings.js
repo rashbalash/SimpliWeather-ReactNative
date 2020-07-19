@@ -30,7 +30,7 @@ class Settings extends Component {
                         actions={[
                             { icon: 'information', label: 'About', onPress: () => this.setState({ aboutModalOpen: true })},
                             { icon: 'plus', label: 'Add a Location', onPress: () => this.setState({ isAddingLocation: true }) },
-                            { icon: 'minus', label: 'Remove Location', onPress: () => this.props.removeLocation() },
+                            { icon: 'minus', label: 'Remove Location', onPress: () => this.props.removeLocation(this.props.currentPage) },
                             { icon: 'theme-light-dark', label: 'Dark or Light Mode', onPress: () => this.props.onThemeChange() },
                             { icon: unitIcon, label: 'Fahrenheit or Celsius', onPress: () => this.props.onUnitChange() },
                         ]}

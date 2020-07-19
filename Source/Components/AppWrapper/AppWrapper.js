@@ -3,14 +3,14 @@ import { ScrollView, StyleSheet, View, Text, StatusBar, RefreshControl, Dimensio
 import WeatherPanel from '../WeatherPanel/WeatherPanel';
 import LocationPanelContainer from '../LocationPanel/LocationPanelContainer';
 
-const Pages = () => {
+const Pages = (props) => {
 
   const weatherPanels = [];
 
-  for (let i = 0; i < 2; ++i) {
+  for (let i = 0; i < props.allLocations.length; ++i) {
     weatherPanels.push (
       <View key={i}>
-        <WeatherPanel />
+        <WeatherPanel location={props.allLocations[i]} index={i} />
       </View>
     )
   }  
@@ -41,11 +41,11 @@ export default function AppWrapper(props) {
               scrollEventThrottle={0}
             >
 
-              <Pages hourlyWeatherData={props.hourlyWeatherData} /> 
+              <Pages allLocations={props.allLocations} /> 
             
             </ScrollView>
         
-            <LocationPanelContainer style={ {backgroundColor: colors.background, color: colors.text } } isModalOpen={ props.locationName } />
+            <LocationPanelContainer style={ {backgroundColor: colors.background, color: colors.text } } />
         </View>
       </ScrollView>
     )

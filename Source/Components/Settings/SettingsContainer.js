@@ -7,6 +7,7 @@ const mapStateToProps = (state) => {
     return {
         weatherUnit: state.reducer.weatherUnit,
         theme: state.reducer.theme,
+        currentPage: state.reducer.currentPage,
     };
 };
 
@@ -18,8 +19,8 @@ const mapDispatchToProps = (dispatch) => {
         onThemeChange: () => {
             dispatch(changeTheme());
         },
-        removeLocation: () => {
-            dispatch(removeLocation());
+        removeLocation: (page) => {
+            dispatch(removeLocation(page));
         }
     }
 }

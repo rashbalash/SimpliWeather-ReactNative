@@ -5,7 +5,7 @@ import LocationPanelSubmitContainer from '../LocationPanelSubmit/LocationPanelSu
 
 export default function LocationPanel(props) {
 
-    const modalVisible = props.locationName === null ? true : false;
+    const modalVisible = props.allLocations.length === 0 ? true : false;
     const backgroundColor = props.style.backgroundColor;
     const fontColor = props.style.color;
     

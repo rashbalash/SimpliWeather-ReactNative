@@ -1,5 +1,6 @@
 import { CHANGE_UNITS, REFRESH, setMoreAboutToday, setLocationName, setCurrentWeather, setHourlyWeather, setDailyWeather } from '../Actions/Actions';
 import { getCurrentWeather, getDailyWeather } from '../../API/weatherAPI';
+import {weatherUnit } from '../../Constants';
 
 const validActions = [ CHANGE_UNITS, REFRESH ];
 
@@ -29,20 +30,22 @@ export default createWeatherMiddleware = store => next => action => {
 
     const currentReducerState = store.getState().reducer;
 
-    getCurrentWeather(currentReducerState.location, currentReducerState.weatherUnit).then(weatherData => {    
-        store.dispatch(setLocationName(weatherData.weatherData));
-        store.dispatch(setMoreAboutToday(weatherData.weatherData));
-        const dailyReducerState = store.getState().reducer;
+    for (let page = 0; page < currentReducerState.allLocations.length; ++page) {
+        getCurrentWeather(currentReducerState.allLocations[page], currentReducerState.weatherUnit).then(weatherData => {  
+            store.dispatch(setLocationName(weatherData.weatherData, page));
+            dispatchMoreAboutToday(store, weatherData.weatherData, page);
+            const dailyReducerState = store.getState().reducer;
 
-        return getDailyWeather(dailyReducerState.location, dailyReducerState.weatherUnit);
-    }).then(dailyWeatherData => {
-        dispatchCurrentData(store, dailyWeatherData.dailyWeatherData);
-        dispatchHourlyData(store, dailyWeatherData.dailyWeatherData);
-        dispatchDailyData(store, dailyWeatherData.dailyWeatherData);
-    });;
+            return getDailyWeather(dailyReducerState.allLocations[page], dailyReducerState.weatherUnit);
+        }).then(dailyWeatherData => {
+            dispatchCurrentData(store, dailyWeatherData.dailyWeatherData, page);
+            dispatchHourlyData(store, dailyWeatherData.dailyWeatherData, page);
+            dispatchDailyData(store, dailyWeatherData.dailyWeatherData, page);
+        });
+    }
 };
 
-function dispatchCurrentData(store, dailyWeatherData) {
+function dispatchCurrentData(store, dailyWeatherData, currentPage) {
 
     var currentTime = dailyWeatherData.current.dt
     const sunrise = dailyWeatherData.current.sunrise;
@@ -58,10 +61,10 @@ function dispatchCurrentData(store, dailyWeatherData) {
         lo: Math.round(dailyWeatherData.daily[0].temp.min),
     }
 
-    store.dispatch(setCurrentWeather(currentWeather));
+    store.dispatch(setCurrentWeather(currentWeather, currentPage));
 }
 
-function dispatchHourlyData(store, dailyWeatherData) {
+function dispatchHourlyData(store, dailyWeatherData, currentPage) {
 
     const currentDaySunrise = dailyWeatherData.current.sunrise;
     const currentDaySunset =  dailyWeatherData.current.sunset;
@@ -98,10 +101,10 @@ function dispatchHourlyData(store, dailyWeatherData) {
         )
     };
 
-    store.dispatch(setHourlyWeather(hourlyWeatherDataArr));
+    store.dispatch(setHourlyWeather(hourlyWeatherDataArr, currentPage));
 };
 
-function dispatchDailyData(store, dailyWeatherData) {
+function dispatchDailyData(store, dailyWeatherData, currentPage) {
 
     let dailyWeatherDataArr = [];
 
@@ -119,8 +122,38 @@ function dispatchDailyData(store, dailyWeatherData) {
         )
     };
 
-    store.dispatch(setDailyWeather(dailyWeatherDataArr));
+    store.dispatch(setDailyWeather(dailyWeatherDataArr, currentPage));
 };
+
+const windArr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+
+function dispatchMoreAboutToday(store, weatherData, currentPage) {
+
+    const state = store.getState();
+
+    const precipitationUnit = state.weatherUnit === weatherUnit.IMPERIAL ? `Inches` : `Centimeters`;
+    const windSpeedUnit = state.weatherUnit === weatherUnit.IMPERIAL ? `mph` : `kmh`;
+    const sunrise = new Date(weatherData.sys.sunrise * 1000).getHours() + `:` + new Date(weatherData.sys.sunrise * 1000).getMinutes();
+    let sunsetHour = new Date(weatherData.sys.sunset * 1000).getHours();
+    sunsetHour = sunsetHour === 0 ? sunsetHour + 12 : sunsetHour;
+    const sunset = sunsetHour > 12 ? (sunsetHour - 12)  + `:` + new Date(weatherData.sys.sunset * 1000).getMinutes(): sunsetHour  + `:` + new Date(weatherData.sys.sunset * 1000).getMinutes();
+
+    const moreAboutTodayArr = [
+        {
+            precipitation: weatherData.hasOwnProperty('rain') ? Math.round((weatherData.rain["1h"]*0.0393701)*10)/10 : 0,
+            precipitationUnit: precipitationUnit,
+            humidity: Math.round(weatherData.main.humidity),
+            sunrise: sunrise,
+            sunset: sunset,
+            wind: Math.round(weatherData.wind.speed),
+            windSpeedUnit: windSpeedUnit,
+            windDirection: windArr[weatherData.wind.deg%8],
+            pressure: weatherData.main.pressure
+        }
+    ];
+
+    store.dispatch(setMoreAboutToday(moreAboutTodayArr, currentPage))
+}
 
 function reverseIdDictionary(accumulator, currentValue) {
     currentValue[1].forEach(value => {

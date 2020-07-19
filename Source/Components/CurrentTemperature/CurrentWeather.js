@@ -9,10 +9,10 @@ export default function CurrentWeather(props) {
             
             <View style={ styles.iconAndTemp }>
                 <WeatherIcon icon={props.id} isDay={props.isDay} style={styles.currentWeatherIcon} />
-                <SimpliWeatherTextContainer style={ styles.CurrentTemp }>{ props.currentTemp }&deg;</SimpliWeatherTextContainer>
+                <SimpliWeatherTextContainer style={ styles.CurrentTemp }>{ props.temp }&deg;</SimpliWeatherTextContainer>
             </View>
             
-            <SimpliWeatherTextContainer style={ styles.CurrentDetails }>{ props.currentCondition } | { props.currentHi }&deg; | { props.currentLo }&deg;</SimpliWeatherTextContainer>
+            <SimpliWeatherTextContainer style={ styles.CurrentDetails }>{ props.condition } | { props.hi }&deg; | { props.lo }&deg;</SimpliWeatherTextContainer>
         </View>
     )
 }

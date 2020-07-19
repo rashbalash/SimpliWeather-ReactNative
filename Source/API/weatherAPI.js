@@ -6,7 +6,6 @@ const oneCallUrl = `${owmRootUrl}onecall?`;
 
 export const getCurrentWeather = (location, tempScale) => {
 
-
     let url;
     if (!!location.lat && !!location.lon)  {
         url = `${weatherUrl}lat=${ location.lat }&lon=${ location.lon }&units=${ tempScale }&appid=${ apikey }`;
@@ -30,7 +29,6 @@ export const getCurrentWeather = (location, tempScale) => {
   }
 
 export const getDailyWeather = (location, tempScale) => {
-
     let url;
     if (!!location.lat && !!location.lon)  {
         url = `${oneCallUrl}lat=${ location.lat }&lon=${ location.lon }&units=${ tempScale }&exclude=minutely&appid=${ apikey }`;

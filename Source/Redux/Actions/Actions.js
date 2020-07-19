@@ -1,7 +1,6 @@
 // Action Constants
 export const GET_NEW_LOCATION = 'GET_NEW_LOCATION';
 export const SET_NEW_LOCATION = 'SET_NEW_LOCATION';
-export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 export const CHANGE_UNITS = 'CHANGE_UNITS';
 export const CHANGE_THEME = 'CHANGE_THEME';
 export const SET_LOCATION_NAME = 'SET_LOCATION_NAME';
@@ -71,14 +70,11 @@ export function setLocationCity(cityName) {
     }
 }
 
-export function removeLocation() {
+export function removeLocation(currentPage) {
     return {
         type: REMOVE_LOCATION,
+        currentPage
     }
-}
-
-export function updateLocation() {
-
 }
 
 export function changeUnits() {
@@ -93,38 +89,43 @@ export function changeTheme() {
     }
 }
 
-export function setLocationName(weatherData) {
+export function setLocationName(weatherData, currentPage) {
     return {
         type: SET_LOCATION_NAME,
-        weatherData
+        weatherData,
+        currentPage
     }
 }
 
-export function setCurrentWeather(currentWeather) {
+export function setCurrentWeather(currentWeather, currentPage) {
     return {
         type: SET_CURRENT_WEATHER,
-        currentWeather
+        currentWeather,
+        currentPage
     }
 }
 
-export function setHourlyWeather(hourlyWeatherData) {
+export function setHourlyWeather(hourlyWeatherData, currentPage) {
     return {
         type: SET_HOURLY_WEATHER,
-        hourlyWeatherData
+        hourlyWeatherData,
+        currentPage
     }
 }
 
-export function setDailyWeather(dailyWeatherData) {
+export function setDailyWeather(dailyWeatherData, currentPage) {
     return {
         type: SET_DAILY_WEATHER,
-        dailyWeatherData
+        dailyWeatherData,
+        currentPage
     }
 }
 
-export function setMoreAboutToday(weatherData) {
+export function setMoreAboutToday(weatherData, currentPage) {
     return {
         type: SET_MORE_ABOUT_TODAY,
-        weatherData
+        weatherData,
+        currentPage
     }
 }
 
