@@ -3,33 +3,27 @@
     "name": "SimpliWeather",
     "slug": "SimpliWeather",
     "ios": {
-      "bundleIdentifier": "com.SimpliWeather",
-      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.simpliweather",
+      "buildNumber": "1.1",
       "supportsTablet": true
     },
     "android": {
       "package": "com.SimpliWeather",
-      "versionCode": 1
+      "versionCode": 4
     },
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
+    "version": "1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#121212"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "description": ""
+    "assetBundlePatterns": ["**/*"],
+    "description": "A Simple Weather App"
   }
 }
