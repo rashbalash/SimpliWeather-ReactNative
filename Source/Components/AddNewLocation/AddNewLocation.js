@@ -52,19 +52,12 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '100%',
+    maxWidth: 700,
     height: '50%',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 30,
-    justifyContent: 'space-between',
-    shadowColor: "#D64045",
-    shadowOffset: {
-      width: 1,
-      height: 1
-    },
-    shadowOpacity: 0.75,
-    shadowRadius: 3.84,
-    elevation: 5
+    justifyContent: 'space-between'    
   },
   modalText: {
     marginBottom: 15,

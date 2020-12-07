@@ -11,8 +11,11 @@ import React, { useRef, useState } from "react";
 import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextContainer";
 import TextInputSearch from "../TextInputSearch/TextInputSearch";
 
+import { ProgressBar } from 'react-native-paper';
+
 export default function LocationPanelSubmit(props) {
   const [textInputVisible, setTextInputVisible] = useState(false);
+  const [componentsInvisible, setComponentsInvisible] = useState(false);
   const [submitText, setText] = useState("");
 
   const FadeInViewTwo = (props) => {
@@ -41,7 +44,15 @@ export default function LocationPanelSubmit(props) {
     return !isNaN(parseInt(submitText));
   };
 
-  if (textInputVisible === true) {
+  if (componentsInvisible === true) {
+    return (
+    <View>
+      <FadeInViewTwo style={styles.emptySpace}> 
+        <ProgressBar indeterminate animating color="#ED1C24" style={ {width: 270, borderRadius: 50} }/>
+      </FadeInViewTwo>
+    </View>
+    )
+  } else if (textInputVisible === true && componentsInvisible === false) {
     return (
       <View>
         <TextInputSearch submitText={submitText} setText={setText} />
@@ -49,7 +60,8 @@ export default function LocationPanelSubmit(props) {
         <View style={styles.currentLocationView}>
           <TouchableOpacity
             style={styles.continueButton}
-            onPress={() => {
+            onPress={() => 
+              {
               if (isZipCode(submitText)) {
                 props.setLocationZip(parseInt(submitText));
                 if (!!props.closeModal) {
@@ -60,7 +72,8 @@ export default function LocationPanelSubmit(props) {
                 if (!!props.closeModal) {
                   props.closeModal();
                 }
-              }
+              };
+            setComponentsInvisible(!componentsInvisible)
             }}
           >
             <Text style={styles.continueText}>Continue</Text>
@@ -73,7 +86,7 @@ export default function LocationPanelSubmit(props) {
             style={styles.cityOrZipcodeContainer}
           >
             <Text style={{ color: "#ED1C24", fontSize: 16 }}>
-              Use your current location
+              Use your Current Location
             </Text>
           </TouchableOpacity>
         </FadeInViewTwo>
@@ -84,7 +97,7 @@ export default function LocationPanelSubmit(props) {
       <View>
         <View style={styles.currentLocationView}>
           <SimpliWeatherTextContainer style={styles.panelContext}>
-            Allow SimpliWeather to use your current location
+            Allow SimpliWeather to use your Current Location
           </SimpliWeatherTextContainer>
 
           <TouchableOpacity
@@ -93,7 +106,8 @@ export default function LocationPanelSubmit(props) {
               props.getNewLocation();
               if (!!props.closeModal) {
                 props.closeModal();
-              }
+              };
+              setComponentsInvisible(!componentsInvisible)
             }}
           >
             <Text style={styles.continueText}>Continue</Text>
@@ -144,4 +158,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignItems: "center",
   },
+  emptySpace: {
+    marginTop: 150
+  }
 });

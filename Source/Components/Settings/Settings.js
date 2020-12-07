@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FAB, Portal } from 'react-native-paper';
+import { Linking } from 'react-native'
 
 import About from '../About/About';
 import AddNewLocation from '../AddNewLocation/AddNewLocation';
@@ -29,6 +30,7 @@ class Settings extends Component {
                         icon={open ? 'close' : 'dots-vertical'}
                         actions={[
                             { icon: 'information', label: 'About', onPress: () => this.setState({ aboutModalOpen: true })},
+                            { icon: 'mail', label: 'Bug Report', onPress: () => Linking.openURL('mailto:Rashad.Balashov@gmail.com?subject=SimpliWeather Bug Report')},
                             { icon: 'plus', label: 'Add a Location', onPress: () => this.setState({ isAddingLocation: true }) },
                             { icon: 'minus', label: 'Remove Location', onPress: () => this.props.removeLocation(this.props.currentPage) },
                             { icon: 'theme-light-dark', label: 'Dark or Light Mode', onPress: () => this.props.onThemeChange() },
