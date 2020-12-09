@@ -6,6 +6,7 @@ import {
   setCurrentWeather,
   setHourlyWeather,
   setDailyWeather,
+  setWeatherAlerts,
 } from "../Actions/Actions";
 import { getCurrentWeather, getDailyWeather } from "../../API/weatherAPI";
 import { weatherUnit } from "../../Constants";
@@ -60,6 +61,7 @@ export default createWeatherMiddleware = (store) => (next) => (action) => {
         dispatchCurrentData(store, dailyWeatherData.dailyWeatherData, page);
         dispatchHourlyData(store, dailyWeatherData.dailyWeatherData, page);
         dispatchDailyData(store, dailyWeatherData.dailyWeatherData, page);
+        dispatchWeatherAlerts(store, dailyWeatherData.dailyWeatherData, page);
       });
   }
 };
@@ -151,7 +153,11 @@ function dispatchMoreAboutToday(store, weatherData, currentPage) {
   const sunrise =
     new Date(weatherData.sys.sunrise * 1000).getHours() +
     `:` +
-    new Date(weatherData.sys.sunrise * 1000).getMinutes();
+    String(new Date(weatherData.sys.sunrise * 1000).getMinutes()).padStart(
+      2,
+      "0"
+    );
+
   let sunsetHour = new Date(weatherData.sys.sunset * 1000).getHours();
   sunsetHour = sunsetHour === 0 ? sunsetHour + 12 : sunsetHour;
   const sunset =
@@ -160,7 +166,12 @@ function dispatchMoreAboutToday(store, weatherData, currentPage) {
         12 +
         `:` +
         new Date(weatherData.sys.sunset * 1000).getMinutes()
-      : sunsetHour + `:` + new Date(weatherData.sys.sunset * 1000).getMinutes();
+      : sunsetHour +
+        `:` +
+        String(new Date(weatherData.sys.sunset * 1000).getMinutes()).padStart(
+          2,
+          "0"
+        );
 
   const moreAboutTodayArr = {
     precipitation: weatherData.hasOwnProperty("rain")
@@ -177,6 +188,35 @@ function dispatchMoreAboutToday(store, weatherData, currentPage) {
   };
 
   store.dispatch(setMoreAboutToday(moreAboutTodayArr, currentPage));
+}
+
+function dispatchWeatherAlerts(store, weatherData, currentPage) {
+  if (typeof weatherData.alerts === "undefined") {
+    return;
+  }
+
+  const currentWeatherAlerts = weatherData.alerts.map((alert) => {
+    const alertStartTime =
+      new Date(alert.start * 1000).getHours() < 12
+        ? new Date(alert.start * 1000).getHours() + "AM"
+        : new Date(alert.start * 1000).getHours() - 12 + "PM";
+    const alertEndTime =
+      new Date(alert.end * 1000).getHours() < 12
+        ? new Date(alert.end * 1000).getHours() + "AM"
+        : new Date(alert.end * 1000).getHours() - 12 + "PM";
+
+    const alertDescription = alert.description.replace(/\n/g, " ").split("* ");
+
+    return {
+      startTime: alertStartTime,
+      endTime: alertEndTime,
+      alertEvent: alert.event,
+      area: alert.sender_name,
+      description: alertDescription,
+    };
+  });
+
+  store.dispatch(setWeatherAlerts(currentWeatherAlerts, currentPage));
 }
 
 function reverseIdDictionary(accumulator, currentValue) {

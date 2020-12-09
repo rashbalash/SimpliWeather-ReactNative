@@ -22,7 +22,7 @@ const sunnyCloudySnowing = require("../../weathericons/animated/sunnyCloudySnowi
 export default function WeatherIcon(props) {
   const icon = matchIcon(props.icon, props.isDay);
   if (icon === undefined) {
-    return <Text>Loading...</Text>;
+    return <Text></Text>;
   }
   return <LottieView source={icon} style={props.style} autoPlay loop />;
 }

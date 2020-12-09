@@ -14,6 +14,7 @@ import {
   SET_HOURLY_WEATHER,
   SET_DAILY_WEATHER,
   REMOVE_LOCATION,
+  SET_WEATHER_ALERTS,
 } from "../Actions/Actions";
 import { weatherUnit, theme } from "../../Constants";
 
@@ -70,6 +71,7 @@ function reducer(state = {}, action) {
 
       return {
         ...state,
+        currentLocationUsed: true,
         allLocations: [...state.allLocations, newLocation],
       };
 
@@ -216,6 +218,27 @@ function reducer(state = {}, action) {
         allLocations: newLocations,
       };
 
+    case SET_WEATHER_ALERTS:
+      newLocations = state.allLocations.reduce(
+        (newLocationArr, oneLocation, index) => {
+          if (index !== action.currentPage) {
+            newLocationArr.push(oneLocation);
+          } else {
+            newLocationArr.push({
+              ...oneLocation,
+              weatherAlerts: action.weatherAlerts,
+            });
+          }
+          return newLocationArr;
+        },
+        []
+      );
+
+      return {
+        ...state,
+        allLocations: newLocations,
+      };
+
     case SET_CURRENT_PAGE:
       return {
         ...state,
@@ -230,6 +253,7 @@ function reducer(state = {}, action) {
 export const initialState = {
   allLocations: [],
   currentPage: 0,
+  currentLocationUsed: false,
   weatherUnit: weatherUnit.IMPERIAL,
   theme: theme.DARK,
   refreshing: false,

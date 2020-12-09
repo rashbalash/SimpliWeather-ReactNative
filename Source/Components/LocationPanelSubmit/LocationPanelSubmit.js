@@ -11,7 +11,7 @@ import React, { useRef, useState } from "react";
 import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextContainer";
 import TextInputSearch from "../TextInputSearch/TextInputSearch";
 
-import { ProgressBar } from 'react-native-paper';
+import { ProgressBar } from "react-native-paper";
 
 export default function LocationPanelSubmit(props) {
   const [textInputVisible, setTextInputVisible] = useState(false);
@@ -46,12 +46,17 @@ export default function LocationPanelSubmit(props) {
 
   if (componentsInvisible === true) {
     return (
-    <View>
-      <FadeInViewTwo style={styles.emptySpace}> 
-        <ProgressBar indeterminate animating color="#ED1C24" style={ {width: 270, borderRadius: 50} }/>
-      </FadeInViewTwo>
-    </View>
-    )
+      <View>
+        <FadeInViewTwo style={styles.emptySpace}>
+          <ProgressBar
+            indeterminate
+            animating
+            color="#ED1C24"
+            style={{ width: 270, borderRadius: 50 }}
+          />
+        </FadeInViewTwo>
+      </View>
+    );
   } else if (textInputVisible === true && componentsInvisible === false) {
     return (
       <View>
@@ -60,8 +65,7 @@ export default function LocationPanelSubmit(props) {
         <View style={styles.currentLocationView}>
           <TouchableOpacity
             style={styles.continueButton}
-            onPress={() => 
-              {
+            onPress={() => {
               if (isZipCode(submitText)) {
                 props.setLocationZip(parseInt(submitText));
                 if (!!props.closeModal) {
@@ -72,8 +76,8 @@ export default function LocationPanelSubmit(props) {
                 if (!!props.closeModal) {
                   props.closeModal();
                 }
-              };
-            setComponentsInvisible(!componentsInvisible)
+              }
+              setComponentsInvisible(!componentsInvisible);
             }}
           >
             <Text style={styles.continueText}>Continue</Text>
@@ -106,8 +110,8 @@ export default function LocationPanelSubmit(props) {
               props.getNewLocation();
               if (!!props.closeModal) {
                 props.closeModal();
-              };
-              setComponentsInvisible(!componentsInvisible)
+              }
+              setComponentsInvisible(!componentsInvisible);
             }}
           >
             <Text style={styles.continueText}>Continue</Text>
@@ -159,6 +163,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   emptySpace: {
-    marginTop: 150
-  }
+    marginTop: 150,
+  },
 });

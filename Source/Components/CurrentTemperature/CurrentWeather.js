@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, View } from "react-native";
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
 import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextContainer";
 
@@ -26,9 +26,7 @@ export default function CurrentWeather(props) {
 
 const styles = StyleSheet.create({
   CurrentWrapper: {
-    // marginTop: 60,
     padding: 20,
-    paddingBottom: 90,
   },
   CurrentDetails: {
     fontSize: 18,
