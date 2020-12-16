@@ -25,6 +25,11 @@ export const getCurrentWeather = (location, tempScale) => {
       return response.json();
     })
     .then((myJson) => {
+
+      if (myJson.cod === "404" && myJson.message === "city not found") {
+        throw new Error(myJson.message);
+      }
+
       return {
         weatherData: myJson,
       };
@@ -52,6 +57,11 @@ export const getDailyWeather = (location, tempScale) => {
       return response.json();
     })
     .then((myJson) => {
+      
+      if (myJson.cod === "404" && myJson.message === "city not found") {
+        throw new Error(myJson.message);
+      }
+
       return {
         dailyWeatherData: myJson,
       };

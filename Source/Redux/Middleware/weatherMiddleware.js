@@ -7,9 +7,11 @@ import {
   setHourlyWeather,
   setDailyWeather,
   setWeatherAlerts,
+  removeLocation,
 } from "../Actions/Actions";
 import { getCurrentWeather, getDailyWeather } from "../../API/weatherAPI";
 import { weatherUnit } from "../../Constants";
+import { Alert } from "react-native";
 
 const validActions = [CHANGE_UNITS, REFRESH];
 
@@ -62,6 +64,27 @@ export default createWeatherMiddleware = (store) => (next) => (action) => {
         dispatchHourlyData(store, dailyWeatherData.dailyWeatherData, page);
         dispatchDailyData(store, dailyWeatherData.dailyWeatherData, page);
         dispatchWeatherAlerts(store, dailyWeatherData.dailyWeatherData, page);
+      })
+      .catch((error) => {
+        // https://stackoverflow.com/a/65036306 Added a setTimeout in relation to having this issue,
+        // as modal must be closed for an alert to pop up on iOS
+        setTimeout(
+          () =>
+            Alert.alert(
+              "Invalid Location",
+              "The location you used was not found, please enter a valid location.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => {
+                    store.dispatch(removeLocation(page));
+                  },
+                },
+              ],
+              { cancelable: false }
+            ),
+          1000
+        );
       });
   }
 };
