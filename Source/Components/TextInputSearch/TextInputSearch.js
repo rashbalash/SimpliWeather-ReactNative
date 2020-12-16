@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTheme } from "react-native-paper";
 import { TextInput, StyleSheet } from "react-native";
 

@@ -9,7 +9,8 @@
     },
     "android": {
       "package": "com.SimpliWeather",
-      "versionCode": 6
+      "versionCode": 6,
+      "useNextNotificationsApi": true
     },
     "platforms": ["ios", "android", "web"],
     "version": "2.0",

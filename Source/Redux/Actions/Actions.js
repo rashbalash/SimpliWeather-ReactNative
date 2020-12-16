@@ -18,6 +18,7 @@ export const REMOVE_LOCATION = "REMOVE_LOCATION";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_NEW_CURRENT_PAGE = "SET_NEW_CURRENT_PAGE";
 export const SET_WEATHER_ALERTS = "SET_WEATHER_ALERTS";
+export const UPDATE_CURRENT_LOCATION = "UPDATE_CURRENT_LOCATION";
 
 // Action Creators
 export function startApp() {
@@ -51,11 +52,24 @@ export function getNewLocation() {
   };
 }
 
-export function setNewLocation(location, currentLocationUsed) {
+export function setNewLocation(
+  location,
+  currentLocationUsed,
+  lastCurrentLocation
+) {
   return {
     type: SET_NEW_LOCATION,
     currentLocationUsed,
     location,
+    lastCurrentLocation,
+  };
+}
+
+export function updateCurrentLocation(location, lastCurrentLocation) {
+  return {
+    type: UPDATE_CURRENT_LOCATION,
+    location,
+    lastCurrentLocation,
   };
 }
 

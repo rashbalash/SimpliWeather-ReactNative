@@ -27,11 +27,16 @@ export default createPaginationMiddleware = (store) => (next) => (action) => {
   const postActionState = store.getState().reducer;
 
   if (
+    postActionState.allLocations.length !== 0 &&
+    preActionState.allLocations.length !== 0 &&
     preActionState.allLocations[preActionState.allLocations.length - 1].name !==
       postActionState.allLocations[postActionState.allLocations.length - 1]
         .name &&
     scrollView !== null
   ) {
+    if (action.type === REMOVE_LOCATION) {
+      scrollView.scrollTo({ x: 0, y: 0, animated: false });
+    }
     scrollView.scrollToEnd({ animated: true });
   }
 };

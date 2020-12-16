@@ -191,7 +191,8 @@ function dispatchMoreAboutToday(store, weatherData, currentPage) {
 }
 
 function dispatchWeatherAlerts(store, weatherData, currentPage) {
-  if (typeof weatherData.alerts === "undefined") {
+  if (weatherData.alerts === undefined) {
+    store.dispatch(setWeatherAlerts(currentWeatherAlerts, currentPage));
     return;
   }
 

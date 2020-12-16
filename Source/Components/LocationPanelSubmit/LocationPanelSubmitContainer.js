@@ -1,23 +1,27 @@
-import { connect } from 'react-redux';
-import LocationPanelSubmit from './LocationPanelSubmit';
-import { setLocationZip, setLocationCity, getNewLocation } from '../../Redux/Actions/Actions';
-
+import { connect } from "react-redux";
+import LocationPanelSubmit from "./LocationPanelSubmit";
+import {
+  setLocationZip,
+  setLocationCity,
+  getNewLocation,
+} from "../../Redux/Actions/Actions";
 
 const mapStateToProps = (state) => {
-    return {
-    };
+  return {
+    isCurrentLocationUsed: state.reducer.currentLocationUsed,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        setLocationZip: (submitText) => dispatch(setLocationZip(submitText)),
-        setLocationCity: (submitText) => dispatch(setLocationCity(submitText)),
-        getNewLocation: () => dispatch(getNewLocation()),
-    }
+  return {
+    setLocationZip: (submitText) => dispatch(setLocationZip(submitText)),
+    setLocationCity: (submitText) => dispatch(setLocationCity(submitText)),
+    getNewLocation: () => dispatch(getNewLocation()),
+  };
 };
 const LocationPanelSubmitContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(LocationPanelSubmit);
 
 export default LocationPanelSubmitContainer;

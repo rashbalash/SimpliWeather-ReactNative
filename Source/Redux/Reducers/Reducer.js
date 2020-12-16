@@ -15,6 +15,8 @@ import {
   SET_DAILY_WEATHER,
   REMOVE_LOCATION,
   SET_WEATHER_ALERTS,
+  CLEAR_WEATHER_ALERTS,
+  UPDATE_CURRENT_LOCATION,
 } from "../Actions/Actions";
 import { weatherUnit, theme } from "../../Constants";
 
@@ -41,15 +43,27 @@ function reducer(state = {}, action) {
       };
 
     case REMOVE_LOCATION:
+      let setInReducer = false;
+
       newLocations = state.allLocations.reduce(
         (newLocationArr, oneLocation, index) => {
           if (index !== action.currentPage) {
             newLocationArr.push(oneLocation);
           }
+          if (
+            index === action.currentPage &&
+            oneLocation.isCurrentLocation === true
+          ) {
+            setInReducer = true;
+          }
           return newLocationArr;
         },
         []
       );
+
+      const setCurrentLocationRemoved = setInReducer
+        ? true
+        : !state.currentLocationUsed;
 
       let newCurrentPage =
         action.currentPage >= newLocations.length
@@ -61,23 +75,50 @@ function reducer(state = {}, action) {
         ...state,
         allLocations: newLocations,
         currentPage: newCurrentPage,
+        currentLocationUsed: !setCurrentLocationRemoved,
       };
 
     case SET_NEW_LOCATION:
       newLocation = {
         lat: action.location.latitude,
         lon: action.location.longitude,
+        isCurrentLocation: true,
       };
 
       return {
         ...state,
         currentLocationUsed: true,
         allLocations: [...state.allLocations, newLocation],
+        lastCurrentLocation: action.location,
+      };
+
+    case UPDATE_CURRENT_LOCATION:
+      const updatedLocations = state.allLocations.reduce(
+        (newLocationArr, oneLocation, index) => {
+          if (!oneLocation.isCurrentLocation) {
+            newLocationArr.push(oneLocation);
+          } else {
+            newLocationArr.push({
+              ...oneLocation,
+              lat: action.location.latitude,
+              lon: action.location.longitude,
+            });
+          }
+          return newLocationArr;
+        },
+        []
+      );
+
+      return {
+        ...state,
+        allLocations: updatedLocations,
+        lastCurrentLocation: action.location,
       };
 
     case SET_LOCATION_CITY:
       newLocation = {
         city: action.cityName,
+        isCurrentLocation: false,
       };
 
       return {
@@ -88,6 +129,7 @@ function reducer(state = {}, action) {
     case SET_LOCATION_ZIP:
       newLocation = {
         zipcode: action.zipcode,
+        isCurrentLocation: false,
       };
 
       return {
@@ -239,6 +281,27 @@ function reducer(state = {}, action) {
         allLocations: newLocations,
       };
 
+    case CLEAR_WEATHER_ALERTS:
+      newLocations = state.allLocations.reduce(
+        (newLocationArr, oneLocation, index) => {
+          if (index !== action.currentPage) {
+            newLocationArr.push(oneLocation);
+          } else {
+            newLocationArr.push({
+              ...oneLocation,
+              weatherAlerts: action.weatherAlerts,
+            });
+          }
+          return newLocationArr;
+        },
+        []
+      );
+
+      return {
+        ...state,
+        allLocations: newLocations,
+      };
+
     case SET_CURRENT_PAGE:
       return {
         ...state,
@@ -254,6 +317,7 @@ export const initialState = {
   allLocations: [],
   currentPage: 0,
   currentLocationUsed: false,
+  lastCurrentLocation: undefined,
   weatherUnit: weatherUnit.IMPERIAL,
   theme: theme.DARK,
   refreshing: false,

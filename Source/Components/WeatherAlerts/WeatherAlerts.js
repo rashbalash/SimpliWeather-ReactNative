@@ -10,7 +10,7 @@ import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextCo
 import SimpliWeatherViewContainer from "../SimpliWeatherView/SimpliWeatherViewContainer";
 
 export default function WeatherAlerts(props) {
-  if (typeof props.weatherAlerts === "undefined") {
+  if (props.weatherAlerts === undefined) {
     return <View style={styles.WeatherAlertEmpty}></View>;
   } else if (props.weatherAlerts.length === 0) {
     return <View style={styles.WeatherAlertEmpty}></View>;
