@@ -137,6 +137,7 @@ function dispatchHourlyData(store, dailyWeatherData, currentPage) {
       isDay: isDay,
       id: idToWeather[dailyWeatherData.hourly[i].weather[0].id],
       temperature: Math.round(dailyWeatherData.hourly[i].temp),
+      pop: dailyWeatherData.hourly[i].pop * 100,
     });
   }
 
@@ -156,6 +157,7 @@ function dispatchDailyData(store, dailyWeatherData, currentPage) {
       id: idToWeather[dailyWeatherData.daily[i].weather[0].id],
       hi: Math.round(dailyWeatherData.daily[i].temp.max),
       lo: Math.round(dailyWeatherData.daily[i].temp.min),
+      pop: dailyWeatherData.daily[i].pop * 100,
     });
   }
 
