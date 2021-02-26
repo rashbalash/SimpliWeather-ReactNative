@@ -2,6 +2,7 @@ import {
   GET_NEW_LOCATION,
   setNewLocation,
   refresh,
+  setState,
   SET_LOCATION_ZIP,
   SET_LOCATION_CITY,
   SET_STATE,
@@ -10,6 +11,10 @@ import {
 } from "../Actions/Actions";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
+import { initialState } from "../Reducers/Reducer";
+import * as Linking from "expo-linking";
+import { Alert } from "react-native";
+import * as Device from "expo-device";
 
 export default createLocationMiddleware = (store) => {
   return (next) => async (action) => {
@@ -56,6 +61,29 @@ export default createLocationMiddleware = (store) => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status !== "granted") {
+      if (store.getState().reducer.allLocations.length === 0) {
+        store.dispatch(setState(initialState));
+        store.dispatch(refresh());
+      }
+
+      if (Device.brand === "Apple") {
+        setTimeout(
+          () =>
+            Alert.alert(
+              "Location Access",
+              "In order to give SimpliWeather access to your location you will have to allow it in settings",
+              [
+                {
+                  text: "Go To Settings",
+                  onPress: () => Linking.openURL("app-settings:"),
+                },
+                { text: "OK" },
+              ],
+              { cancelable: false }
+            ),
+          800
+        );
+      }
       return;
     }
 

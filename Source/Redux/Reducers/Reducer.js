@@ -18,7 +18,7 @@ import {
   CLEAR_WEATHER_ALERTS,
   UPDATE_CURRENT_LOCATION,
 } from "../Actions/Actions";
-import { weatherUnit, theme } from "../../Constants";
+import { weatherUnit, theme } from "../../globalConstants";
 
 function reducer(state = {}, action) {
   let newLocation, newLocations;
@@ -118,6 +118,7 @@ function reducer(state = {}, action) {
     case SET_LOCATION_CITY:
       newLocation = {
         city: action.cityName,
+        countryCode: action.countryCode,
         isCurrentLocation: false,
       };
 
@@ -129,6 +130,7 @@ function reducer(state = {}, action) {
     case SET_LOCATION_ZIP:
       newLocation = {
         zipcode: action.zipcode,
+        countryCode: action.countryCode,
         isCurrentLocation: false,
       };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "react-native-paper";
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, View } from "react-native";
 
 export default function TextInputSearch(props) {
   const { colors } = useTheme();

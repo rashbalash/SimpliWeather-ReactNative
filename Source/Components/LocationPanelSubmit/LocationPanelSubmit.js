@@ -9,7 +9,7 @@ import React, { useRef, useState } from "react";
 
 import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextContainer";
 import TextInputSearch from "../TextInputSearch/TextInputSearch";
-
+import CountrySelect from "../CountrySelect/CountrySelect";
 import { ProgressBar } from "react-native-paper";
 
 export default function LocationPanelSubmit(props) {
@@ -19,6 +19,7 @@ export default function LocationPanelSubmit(props) {
   const [componentsInvisible, setComponentsInvisible] = useState(false);
   const [submitText, setText] = useState("");
   const [displayWarning, setDisplayWarning] = useState(false);
+  const [countryCode, setCountryCode] = useState("US");
 
   const FadeInViewTwo = (props) => {
     const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
@@ -61,7 +62,7 @@ export default function LocationPanelSubmit(props) {
     );
   } else if (textInputVisible === true && componentsInvisible === false) {
     return (
-      <View>
+      <View style={{ width: "100%" }}>
         <SimpliWeatherTextContainer
           style={
             displayWarning ? styles.locationWarning : { height: 0, opacity: 0 }
@@ -70,7 +71,15 @@ export default function LocationPanelSubmit(props) {
           Please Use A Valid Location
         </SimpliWeatherTextContainer>
 
-        <TextInputSearch submitText={submitText} setText={setText} />
+        <View style={styles.inputSection}>
+          <CountrySelect
+            countryCode={countryCode}
+            setCountryCode={setCountryCode}
+          />
+          <View style={{ paddingLeft: 5, flexGrow: 1 }}>
+            <TextInputSearch submitText={submitText} setText={setText} />
+          </View>
+        </View>
         <View style={styles.currentLocationView}>
           <TouchableOpacity
             style={styles.continueButton}
@@ -82,13 +91,13 @@ export default function LocationPanelSubmit(props) {
                   );
                   return;
                 }
-                props.setLocationZip(parseInt(submitText.trim()));
+                props.setLocationZip(parseInt(submitText.trim()), countryCode);
                 if (!!props.closeModal) {
                   props.closeModal();
                 }
               } else {
                 if (submitText.trim()) {
-                  props.setLocationCity(submitText.trim());
+                  props.setLocationCity(submitText.trim(), countryCode);
                   if (!!props.closeModal) {
                     props.closeModal();
                   }
@@ -126,7 +135,7 @@ export default function LocationPanelSubmit(props) {
       <View>
         <View style={styles.currentLocationView}>
           <SimpliWeatherTextContainer style={styles.panelContext}>
-            Allow SimpliWeather to use your Current Location
+            Allow SimpliWeather to use your location
           </SimpliWeatherTextContainer>
 
           <TouchableOpacity
@@ -211,5 +220,10 @@ const styles = StyleSheet.create({
   },
   emptySpace: {
     marginTop: 150,
+  },
+  inputSection: {
+    display: "flex",
+    flexDirection: "row",
+    flexGrow: 1,
   },
 });

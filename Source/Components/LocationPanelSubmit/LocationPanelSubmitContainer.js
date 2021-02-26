@@ -14,8 +14,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setLocationZip: (submitText) => dispatch(setLocationZip(submitText)),
-    setLocationCity: (submitText) => dispatch(setLocationCity(submitText)),
+    setLocationZip: (submitText, countryCode) =>
+      dispatch(setLocationZip(submitText, countryCode)),
+    setLocationCity: (submitText, countryCode) =>
+      dispatch(setLocationCity(submitText, countryCode)),
     getNewLocation: () => dispatch(getNewLocation()),
   };
 };

@@ -9,13 +9,9 @@ export const getCurrentWeather = (location, tempScale) => {
   if (!!location.lat && !!location.lon) {
     url = `${weatherUrl}lat=${location.lat}&lon=${location.lon}&units=${tempScale}&appid=${apikey}`;
   } else if (!!location.zipcode) {
-    url = `${weatherUrl}zip=${
-      location.zipcode
-    },${"US"}&units=${tempScale}&appid=${apikey}`;
+    url = `${weatherUrl}zip=${location.zipcode},${location.countryCode}&units=${tempScale}&appid=${apikey}`;
   } else if (!!location.city) {
-    url = `${weatherUrl}q=${
-      location.city
-    },${"US"}&units=${tempScale}&appid=${apikey}`;
+    url = `${weatherUrl}q=${location.city},${location.countryCode}&units=${tempScale}&appid=${apikey}`;
   } else {
     console.log("No Data");
   }
@@ -25,7 +21,6 @@ export const getCurrentWeather = (location, tempScale) => {
       return response.json();
     })
     .then((myJson) => {
-
       if (myJson.cod === "404" && myJson.message === "city not found") {
         throw new Error(myJson.message);
       }
@@ -41,13 +36,9 @@ export const getDailyWeather = (location, tempScale) => {
   if (!!location.lat && !!location.lon) {
     url = `${oneCallUrl}lat=${location.lat}&lon=${location.lon}&units=${tempScale}&exclude=minutely&appid=${apikey}`;
   } else if (!!location.zipcode) {
-    url = `${oneCallUrl}zip=${
-      location.zipcode
-    },${"US"}&units=${tempScale}&appid=${apikey}`;
+    url = `${oneCallUrl}zip=${location.zipcode},${location.countryCode}&units=${tempScale}&appid=${apikey}`;
   } else if (!!location.city) {
-    url = `${oneCallUrl}q=${
-      location.city
-    },${"US"}&units=${tempScale}&appid=${apikey}`;
+    url = `${oneCallUrl}q=${location.city},${location.countryCode}&units=${tempScale}&appid=${apikey}`;
   } else {
     console.log("No Data");
   }
@@ -57,7 +48,6 @@ export const getDailyWeather = (location, tempScale) => {
       return response.json();
     })
     .then((myJson) => {
-      
       if (myJson.cod === "404" && myJson.message === "city not found") {
         throw new Error(myJson.message);
       }

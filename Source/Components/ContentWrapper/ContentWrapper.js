@@ -9,7 +9,7 @@ import {
   Provider as PaperProvider,
 } from "react-native-paper";
 
-import { theme } from "../../Constants";
+import { theme } from "../../globalConstants";
 
 export default function ContentWrapper(props) {
   return (

@@ -10,7 +10,7 @@ import {
   removeLocation,
 } from "../Actions/Actions";
 import { getCurrentWeather, getDailyWeather } from "../../API/weatherAPI";
-import { weatherUnit } from "../../Constants";
+import { weatherUnit } from "../../globalConstants";
 import { Alert } from "react-native";
 
 const validActions = [CHANGE_UNITS, REFRESH];

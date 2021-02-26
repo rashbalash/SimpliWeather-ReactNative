@@ -73,17 +73,19 @@ export function updateCurrentLocation(location, lastCurrentLocation) {
   };
 }
 
-export function setLocationZip(zipcode) {
+export function setLocationZip(zipcode, countryCode) {
   return {
     type: SET_LOCATION_ZIP,
     zipcode,
+    countryCode,
   };
 }
 
-export function setLocationCity(cityName) {
+export function setLocationCity(cityName, countryCode) {
   return {
     type: SET_LOCATION_CITY,
     cityName,
+    countryCode,
   };
 }
 
