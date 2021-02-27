@@ -5,7 +5,7 @@ import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextCo
 
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
 const ShowPercentage = (props) => {
-  if (props.pop !== 0) {
+  if (props.pop >= 20) {
     return <Text style={{ color: "#1976d2" }}>{props.pop}%</Text>;
   }
   return <Text style={{ color: "#1976d2" }}></Text>;
@@ -19,7 +19,7 @@ export default function Hourly(props) {
         <View key={i} style={styles.HourWrapper}>
           {/* Time */}
           <SimpliWeatherTextContainer style={styles.HourlyTime}>
-            {props.hourlyWeatherData[i].hour}:00{" "}
+            {props.hourlyWeatherData[i].hour}:00
             {props.hourlyWeatherData[i].amOrPm}
           </SimpliWeatherTextContainer>
           {/* Icon */}
@@ -28,11 +28,12 @@ export default function Hourly(props) {
             isDay={props.hourlyWeatherData[i].isDay}
             style={styles.HourlyIcon}
           />
+          {/* Percentage of Precipitation */}
+          <ShowPercentage pop={props.hourlyWeatherData[i].pop} />
           {/* Temperature */}
           <SimpliWeatherTextContainer style={styles.HourlyTemp}>
             {props.hourlyWeatherData[i].temperature}&deg;
           </SimpliWeatherTextContainer>
-          <ShowPercentage pop={props.hourlyWeatherData[i].pop} />
         </View>
       );
     }
@@ -75,5 +76,6 @@ const styles = StyleSheet.create({
   HourlyIcon: {
     width: 65,
     height: 65,
+    marginBottom: -8,
   },
 });

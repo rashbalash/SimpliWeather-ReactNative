@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
-import Settings from "./Settings";
+import Settings from "./SettingsPage";
 import {
   changeUnits,
   changeTheme,
-  removeLocation,
+  showUnitAction,
+  showThemeAction,
 } from "../../Redux/Actions/Actions";
 import { withTheme } from "react-native-paper";
 
@@ -25,15 +26,18 @@ const mapDispatchToProps = (dispatch) => {
     onThemeChange: () => {
       dispatch(changeTheme());
     },
-    removeLocation: (page) => {
-      dispatch(removeLocation(page));
+    onShowUnitAction: () => {
+      dispatch(showUnitAction());
+    },
+    onShowThemeAction: () => {
+      dispatch(showThemeAction());
     },
   };
 };
 
-const SettingsContainer = connect(
+const SettingsPageContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(withTheme(Settings));
 
-export default SettingsContainer;
+export default SettingsPageContainer;

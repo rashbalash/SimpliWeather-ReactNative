@@ -6,7 +6,7 @@ import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextCo
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
 
 const ShowPercentage = (props) => {
-  if (props.pop !== 0) {
+  if (props.pop >= 20) {
     return <Text style={{ color: "#1976d2" }}>{props.pop}%</Text>;
   }
   return <Text style={{ color: "#1976d2" }}></Text>;
@@ -29,13 +29,13 @@ export default function Daily(props) {
             isDay={true}
             style={styles.DailyIcon}
           />
+          {/* Percentage of Precipitation */}
+          <ShowPercentage pop={props.dailyWeatherData[i].pop} />
           {/* Temperature */}
           <SimpliWeatherTextContainer style={styles.DailyTemps}>
             {props.dailyWeatherData[i].hi}&deg; | {props.dailyWeatherData[i].lo}
             &deg;
           </SimpliWeatherTextContainer>
-          {/* Percentage of Precipitation */}
-          <ShowPercentage pop={props.dailyWeatherData[i].pop} />
         </View>
       );
     }
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   },
   DailyIcon: {
     width: 65,
+    marginBottom: -2,
     height: 65,
   },
 });

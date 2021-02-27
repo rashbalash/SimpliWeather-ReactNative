@@ -17,6 +17,8 @@ import {
   SET_WEATHER_ALERTS,
   CLEAR_WEATHER_ALERTS,
   UPDATE_CURRENT_LOCATION,
+  SHOW_THEME_ACTION,
+  SHOW_UNIT_ACTION,
 } from "../Actions/Actions";
 import { weatherUnit, theme } from "../../globalConstants";
 
@@ -152,6 +154,18 @@ function reducer(state = {}, action) {
       return {
         ...state,
         theme: state.theme === theme.LIGHT ? theme.DARK : theme.LIGHT,
+      };
+
+    case SHOW_THEME_ACTION:
+      return {
+        ...state,
+        showThemeAction: state.showThemeAction === true ? false : true,
+      };
+
+    case SHOW_UNIT_ACTION:
+      return {
+        ...state,
+        showUnitAction: state.showUnitAction === true ? false : true,
       };
 
     case SET_LOCATION_NAME:
@@ -324,6 +338,8 @@ export const initialState = {
   theme: theme.DARK,
   refreshing: false,
   loading: false,
+  showUnitAction: true,
+  showThemeAction: true,
 };
 
 export default reducer;

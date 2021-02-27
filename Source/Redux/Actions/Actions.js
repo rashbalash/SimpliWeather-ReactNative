@@ -19,6 +19,8 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_NEW_CURRENT_PAGE = "SET_NEW_CURRENT_PAGE";
 export const SET_WEATHER_ALERTS = "SET_WEATHER_ALERTS";
 export const UPDATE_CURRENT_LOCATION = "UPDATE_CURRENT_LOCATION";
+export const SHOW_THEME_ACTION = "SHOW_THEME_ACTION";
+export const SHOW_UNIT_ACTION = "SHOW_UNIT_ACTION";
 
 // Action Creators
 export function startApp() {
@@ -105,6 +107,18 @@ export function changeUnits() {
 export function changeTheme() {
   return {
     type: CHANGE_THEME,
+  };
+}
+
+export function showThemeAction() {
+  return {
+    type: SHOW_THEME_ACTION,
+  };
+}
+
+export function showUnitAction() {
+  return {
+    type: SHOW_UNIT_ACTION,
   };
 }
 
