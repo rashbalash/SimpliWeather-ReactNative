@@ -46,7 +46,6 @@ class Settings extends Component {
             open={open}
             icon={open ? "close" : "dots-vertical"}
             actions={[
-              ...additionalActionArray,
               {
                 icon: "cog",
                 label: "Settings",
@@ -63,6 +62,7 @@ class Settings extends Component {
                 onPress: () =>
                   this.props.removeLocation(this.props.currentPage),
               },
+              ...additionalActionArray,
             ]}
             small
             onStateChange={this._onStateChange}
