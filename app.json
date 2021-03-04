@@ -4,8 +4,9 @@
     "slug": "SimpliWeather",
     "ios": {
       "bundleIdentifier": "com.simpliweather",
-      "buildNumber": "2.0.1",
+      "buildNumber": "2.1.0",
       "supportsTablet": true,
+      "icon": "./assets/iosIcon.png",
       "infoPlist": {
         "NSLocationUsageDescription": "This app uses Location Permissions in order to find your current location and sends a request for the weather data in your current location.",
         "NSLocationWhenInUseUsageDescription": "This app uses Location Permissions in order to find your current location and sends a request for the weather data in your current location."
@@ -13,13 +14,13 @@
     },
     "android": {
       "package": "com.SimpliWeather",
-      "versionCode": 7,
-      "useNextNotificationsApi": true
+      "versionCode": 8,
+      "useNextNotificationsApi": true,
+      "icon": "./assets/androidIcon.png"
     },
     "platforms": ["ios", "android", "web"],
-    "version": "2.0.1",
+    "version": "2.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
