@@ -12,6 +12,7 @@ import {
 import { getCurrentWeather, getDailyWeather } from "../../API/weatherAPI";
 import { weatherUnit } from "../../globalConstants";
 import { Alert } from "react-native";
+import moment from "moment";
 
 const validActions = [CHANGE_UNITS, REFRESH];
 
@@ -137,7 +138,7 @@ function dispatchHourlyData(store, dailyWeatherData, currentPage) {
       isDay: isDay,
       id: idToWeather[dailyWeatherData.hourly[i].weather[0].id],
       temperature: Math.round(dailyWeatherData.hourly[i].temp),
-      pop: dailyWeatherData.hourly[i].pop * 100,
+      pop: Math.round(dailyWeatherData.hourly[i].pop * 100),
     });
   }
 
@@ -157,7 +158,7 @@ function dispatchDailyData(store, dailyWeatherData, currentPage) {
       id: idToWeather[dailyWeatherData.daily[i].weather[0].id],
       hi: Math.round(dailyWeatherData.daily[i].temp.max),
       lo: Math.round(dailyWeatherData.daily[i].temp.min),
-      pop: dailyWeatherData.daily[i].pop * 100,
+      pop: Math.round(dailyWeatherData.daily[i].pop * 100),
     });
   }
 
@@ -175,22 +176,47 @@ function dispatchMoreAboutToday(store, weatherData, currentPage) {
       : `Centimeters`;
   const windSpeedUnit =
     state.reducer.weatherUnit === weatherUnit.IMPERIAL ? `mph` : `kmh`;
-  const sunrise =
-    new Date(weatherData.sys.sunrise * 1000).getHours() +
-    `:` +
-    String(new Date(weatherData.sys.sunrise * 1000).getMinutes()).padStart(
-      2,
-      "0"
-    );
 
-  let sunsetHour = new Date(weatherData.sys.sunset * 1000).getHours();
+  let sunriseHour = moment
+    .unix(weatherData.sys.sunrise)
+    .utc()
+    .add(weatherData.timezone, "s")
+    .get("hour");
+
+  let sunriseAmOrPm = sunriseHour >= 12 ? "PM" : "AM";
+  const sunrise =
+    sunriseHour > 12
+      ? sunriseHour -
+        12 +
+        `:` +
+        String(new Date(weatherData.sys.sunrise * 1000).getMinutes()).padStart(
+          2,
+          "0"
+        )
+      : sunriseHour +
+        `:` +
+        String(new Date(weatherData.sys.sunrise * 1000).getMinutes()).padStart(
+          2,
+          "0"
+        );
+
+  let sunsetHour = moment
+    .unix(weatherData.sys.sunset)
+    .utc()
+    .add(weatherData.timezone, "s")
+    .get("hour");
+
+  let sunsetAmOrPm = sunsetHour >= 12 ? "PM" : "AM";
   sunsetHour = sunsetHour === 0 ? sunsetHour + 12 : sunsetHour;
   const sunset =
     sunsetHour > 12
       ? sunsetHour -
         12 +
         `:` +
-        new Date(weatherData.sys.sunset * 1000).getMinutes()
+        String(new Date(weatherData.sys.sunset * 1000).getMinutes()).padStart(
+          2,
+          "0"
+        )
       : sunsetHour +
         `:` +
         String(new Date(weatherData.sys.sunset * 1000).getMinutes()).padStart(
@@ -205,7 +231,9 @@ function dispatchMoreAboutToday(store, weatherData, currentPage) {
     precipitationUnit: precipitationUnit,
     humidity: Math.round(weatherData.main.humidity),
     sunrise: sunrise,
+    sunriseTime: sunriseAmOrPm,
     sunset: sunset,
+    sunsetTime: sunsetAmOrPm,
     wind: Math.round(weatherData.wind.speed),
     windSpeedUnit: windSpeedUnit,
     windDirection: windArr[weatherData.wind.deg % 8],

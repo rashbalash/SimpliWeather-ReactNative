@@ -19,7 +19,7 @@ export default function Hourly(props) {
         <View key={i} style={styles.HourWrapper}>
           {/* Time */}
           <SimpliWeatherTextContainer style={styles.HourlyTime}>
-            {props.hourlyWeatherData[i].hour}:00
+            {props.hourlyWeatherData[i].hour}:00{" "}
             {props.hourlyWeatherData[i].amOrPm}
           </SimpliWeatherTextContainer>
           {/* Icon */}
