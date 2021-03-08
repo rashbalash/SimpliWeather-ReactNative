@@ -52,7 +52,7 @@ export default function More(props) {
             Pressure
           </SimpliWeatherTextContainer>
           <SimpliWeatherTextContainer style={styles.itemValue}>
-            {props.pressure} Pascals
+            {props.pressure} Millibars
           </SimpliWeatherTextContainer>
         </View>
       </View>

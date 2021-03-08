@@ -224,10 +224,22 @@ function dispatchMoreAboutToday(store, weatherData, currentPage) {
           "0"
         );
 
+  let precipitationAmount = 0;
+
+  if (weatherData.hasOwnProperty("rain")) {
+    precipitationAmount =
+      state.reducer.weatherUnit === weatherUnit.IMPERIAL
+        ? Math.round(weatherData.rain["1h"] * 0.0393701 * 10) / 10
+        : Math.round(weatherData.rain["1h"] * 10) / 100;
+  } else if (weatherData.hasOwnProperty("snow")) {
+    precipitationAmount =
+      state.reducer.weatherUnit === weatherUnit.IMPERIAL
+        ? Math.round(weatherData.snow["1h"] * 0.0393701 * 10) / 10
+        : Math.round(weatherData.snow["1h"] * 10) / 100;
+  }
+
   const moreAboutTodayArr = {
-    precipitation: weatherData.hasOwnProperty("rain")
-      ? Math.round(weatherData.rain["1h"] * 0.0393701 * 10) / 10
-      : 0,
+    precipitation: precipitationAmount,
     precipitationUnit: precipitationUnit,
     humidity: Math.round(weatherData.main.humidity),
     sunrise: sunrise,

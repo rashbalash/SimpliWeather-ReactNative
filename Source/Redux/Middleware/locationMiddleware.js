@@ -22,6 +22,11 @@ export default createLocationMiddleware = (store) => {
 
     if (action.type === START_APP) {
       store.dispatch(refresh());
+
+      // fetch(`https://ipapi.co/8.8.8.8/json`)
+      //   .then((response) => response.json())
+      //   .then((data) => console.log(data));
+
       return;
     }
 

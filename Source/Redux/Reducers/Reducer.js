@@ -126,6 +126,7 @@ function reducer(state = {}, action) {
 
       return {
         ...state,
+        lastSelectedCountry: action.countryCode,
         allLocations: [...state.allLocations, newLocation],
       };
 
@@ -138,6 +139,7 @@ function reducer(state = {}, action) {
 
       return {
         ...state,
+        lastSelectedCountry: action.countryCode,
         allLocations: [...state.allLocations, newLocation],
       };
 
@@ -340,6 +342,7 @@ export const initialState = {
   loading: false,
   showUnitAction: true,
   showThemeAction: true,
+  lastSelectedCountry: "US",
 };
 
 export default reducer;
