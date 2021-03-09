@@ -19,6 +19,7 @@ import {
   UPDATE_CURRENT_LOCATION,
   SHOW_THEME_ACTION,
   SHOW_UNIT_ACTION,
+  SET_DEFAULT_COUNTRY_CODE,
 } from "../Actions/Actions";
 import { weatherUnit, theme } from "../../globalConstants";
 
@@ -42,6 +43,12 @@ function reducer(state = {}, action) {
       return {
         ...state,
         loading: true,
+      };
+
+    case SET_DEFAULT_COUNTRY_CODE:
+      return {
+        ...state,
+        defaultCountryCode: action.countryCode,
       };
 
     case REMOVE_LOCATION:
@@ -126,7 +133,6 @@ function reducer(state = {}, action) {
 
       return {
         ...state,
-        lastSelectedCountry: action.countryCode,
         allLocations: [...state.allLocations, newLocation],
       };
 
@@ -139,7 +145,6 @@ function reducer(state = {}, action) {
 
       return {
         ...state,
-        lastSelectedCountry: action.countryCode,
         allLocations: [...state.allLocations, newLocation],
       };
 
@@ -342,7 +347,7 @@ export const initialState = {
   loading: false,
   showUnitAction: true,
   showThemeAction: true,
-  lastSelectedCountry: "US",
+  defaultCountryCode: "US",
 };
 
 export default reducer;

@@ -19,7 +19,9 @@ export default function LocationPanelSubmit(props) {
   const [componentsInvisible, setComponentsInvisible] = useState(false);
   const [submitText, setText] = useState("");
   const [displayWarning, setDisplayWarning] = useState(false);
-  const [countryCode, setCountryCode] = useState("US");
+  const [currentCountryCode, setcurrentCountryCode] = useState(
+    props.countryCode
+  );
 
   const FadeInViewTwo = (props) => {
     const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
@@ -73,8 +75,8 @@ export default function LocationPanelSubmit(props) {
 
         <View style={styles.inputSection}>
           <CountrySelect
-            countryCode={countryCode}
-            setCountryCode={setCountryCode}
+            countryCode={currentCountryCode}
+            setCountryCode={setcurrentCountryCode}
           />
           <View style={{ paddingLeft: 5, flexGrow: 1 }}>
             <TextInputSearch submitText={submitText} setText={setText} />
@@ -91,13 +93,16 @@ export default function LocationPanelSubmit(props) {
                   );
                   return;
                 }
-                props.setLocationZip(parseInt(submitText.trim()), countryCode);
+                props.setLocationZip(
+                  parseInt(submitText.trim()),
+                  currentCountryCode
+                );
                 if (!!props.closeModal) {
                   props.closeModal();
                 }
               } else {
                 if (submitText.trim()) {
-                  props.setLocationCity(submitText.trim(), countryCode);
+                  props.setLocationCity(submitText.trim(), currentCountryCode);
                   if (!!props.closeModal) {
                     props.closeModal();
                   }

@@ -21,6 +21,7 @@ export const SET_WEATHER_ALERTS = "SET_WEATHER_ALERTS";
 export const UPDATE_CURRENT_LOCATION = "UPDATE_CURRENT_LOCATION";
 export const SHOW_THEME_ACTION = "SHOW_THEME_ACTION";
 export const SHOW_UNIT_ACTION = "SHOW_UNIT_ACTION";
+export const SET_DEFAULT_COUNTRY_CODE = "SET_DEFAULT_COUNTRY_CODE";
 
 // Action Creators
 export function startApp() {
@@ -51,6 +52,13 @@ export function loadingScreen() {
 export function getNewLocation() {
   return {
     type: GET_NEW_LOCATION,
+  };
+}
+
+export function setDefaultCountryCode(countryCode) {
+  return {
+    type: SET_DEFAULT_COUNTRY_CODE,
+    countryCode,
   };
 }
 

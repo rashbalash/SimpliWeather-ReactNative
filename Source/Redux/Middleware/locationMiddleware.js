@@ -8,6 +8,7 @@ import {
   SET_STATE,
   START_APP,
   updateCurrentLocation,
+  setDefaultCountryCode,
 } from "../Actions/Actions";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -15,6 +16,7 @@ import { initialState } from "../Reducers/Reducer";
 import * as Linking from "expo-linking";
 import { Alert } from "react-native";
 import * as Device from "expo-device";
+import { getCountryCode } from "../../API/ipAPI";
 
 export default createLocationMiddleware = (store) => {
   return (next) => async (action) => {
@@ -23,9 +25,9 @@ export default createLocationMiddleware = (store) => {
     if (action.type === START_APP) {
       store.dispatch(refresh());
 
-      // fetch(`https://ipapi.co/8.8.8.8/json`)
-      //   .then((response) => response.json())
-      //   .then((data) => console.log(data));
+      getCountryCode().then((countryCode) => {
+        store.dispatch(setDefaultCountryCode(countryCode.countryCode));
+      });
 
       return;
     }

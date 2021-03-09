@@ -9,6 +9,7 @@ import {
 const mapStateToProps = (state) => {
   return {
     isCurrentLocationUsed: state.reducer.currentLocationUsed,
+    countryCode: state.reducer.defaultCountryCode,
   };
 };
 
