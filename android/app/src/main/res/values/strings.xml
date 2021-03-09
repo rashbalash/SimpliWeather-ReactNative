@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <resources>
-  <string name="app_name">SimpliWeather</string>
+    <string name="app_name">SimpliWeather</string>
+    <string name="appwidget_text">SimpliWeather</string>
+    <string name="add_widget">Add widget</string>
 </resources>
