@@ -21,4 +21,6 @@ target 'SimpliWeather' do
   #  post_install do |installer|
   #    flipper_post_install(installer)
   #  end
+  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
 end
