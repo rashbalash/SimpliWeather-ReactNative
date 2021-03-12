@@ -32,7 +32,7 @@ export default function SettingsPage(props) {
       presentationStyle={"fullScreen"}
     >
       <ScrollView style={{ backgroundColor: colors.background }}>
-        <View style={(styles.centeredView, { paddingTop: 30 })}>
+        <View style={(styles.centeredView, { paddingTop: 60 })}>
           <SimpliWeatherViewContainer style={styles.modalView}>
             <View style={styles.modalHeader}>
               <SimpliWeatherTextContainer style={styles.settingsTitle}>
