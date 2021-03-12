@@ -16,9 +16,6 @@ export default function CurrentWeather(props) {
           <SimpliWeatherTextContainer style={styles.CurrentTemp}>
             {props.temp}&deg;
           </SimpliWeatherTextContainer>
-          {/* <SimpliWeatherTextContainer style={styles.feelsLikeTemp}>
-            Feels Like {props.feelsLikeTemp}&deg;
-          </SimpliWeatherTextContainer> */}
         </View>
       </View>
 
