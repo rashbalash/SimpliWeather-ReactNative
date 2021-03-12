@@ -42,7 +42,7 @@ export default function WeatherAlerts(props) {
         style={{
           height: expanded ? 0 : null,
           overflow: "hidden",
-          paddingTop: 20,
+          paddingTop: expanded ? 0 : 20,
           minWidth: 250,
           alignSelf: "center",
           maxWidth: "90%",
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ED1C24",
   },
   WeatherAlertEmpty: {
-    paddingBottom: 130,
+    paddingBottom: 110,
   },
 });

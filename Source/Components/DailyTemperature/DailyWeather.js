@@ -58,7 +58,7 @@ export default function Daily(props) {
 
 const styles = StyleSheet.create({
   DailyWrapper: {
-    paddingBottom: 20,
+    paddingBottom: 50,
   },
   DailyHeader: {
     fontSize: 30,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   DailyIcon: {
     width: 65,
-    marginBottom: -2,
+    marginBottom: -5,
     height: 65,
   },
 });

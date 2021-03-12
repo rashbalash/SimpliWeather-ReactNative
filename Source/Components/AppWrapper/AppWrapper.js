@@ -93,15 +93,14 @@ export default function AppWrapper(props) {
 
 const styles = StyleSheet.create({
   HeaderTitle: {
-    fontSize: 36,
+    fontSize: 30,
   },
   HeaderWrapper: {
-    paddingTop: 20,
+    paddingTop: 50,
     margin: "auto",
     alignItems: "center",
   },
   contentWrapper: {
-    paddingTop: 20,
     padding: 10,
   },
 });

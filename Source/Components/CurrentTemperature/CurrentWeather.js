@@ -12,13 +12,21 @@ export default function CurrentWeather(props) {
           isDay={props.isDay}
           style={styles.currentWeatherIcon}
         />
-        <SimpliWeatherTextContainer style={styles.CurrentTemp}>
-          {props.temp}&deg;
-        </SimpliWeatherTextContainer>
+        <View style={styles.tempsContainer}>
+          <SimpliWeatherTextContainer style={styles.CurrentTemp}>
+            {props.temp}&deg;
+          </SimpliWeatherTextContainer>
+          {/* <SimpliWeatherTextContainer style={styles.feelsLikeTemp}>
+            Feels Like {props.feelsLikeTemp}&deg;
+          </SimpliWeatherTextContainer> */}
+        </View>
       </View>
 
       <SimpliWeatherTextContainer style={styles.CurrentDetails}>
         {props.condition} | {props.hi}&deg; | {props.lo}&deg;
+      </SimpliWeatherTextContainer>
+      <SimpliWeatherTextContainer style={styles.feelsLikeTemp}>
+        Feels Like {props.feelsLikeTemp}&deg;
       </SimpliWeatherTextContainer>
     </View>
   );
@@ -27,6 +35,8 @@ export default function CurrentWeather(props) {
 const styles = StyleSheet.create({
   CurrentWrapper: {
     padding: 20,
+    paddingTop: 60,
+    paddingBottom: 10,
   },
   CurrentDetails: {
     fontSize: 18,
@@ -39,12 +49,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   currentWeatherIcon: {
-    width: 200,
-    height: 200,
-    marginLeft: "-2%",
+    width: 210,
+    height: 210,
+    marginLeft: "-4%",
   },
   CurrentTemp: {
-    fontSize: 84,
-    marginRight: "2%",
+    fontSize: 96,
+    marginRight: "3%",
+    opacity: 0.9,
+  },
+  feelsLikeTemp: {
+    opacity: 0.5,
+    fontSize: 16,
+    textAlign: "center",
+    paddingTop: 5,
   },
 });

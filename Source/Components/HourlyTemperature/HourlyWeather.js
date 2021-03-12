@@ -56,7 +56,7 @@ export default function Hourly(props) {
 
 const styles = StyleSheet.create({
   HourlyWrapper: {
-    paddingBottom: 20,
+    paddingBottom: 50,
   },
   HourlyHeader: {
     fontSize: 30,
@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
   HourlyIcon: {
     width: 65,
     height: 65,
-    marginBottom: -8,
+    marginBottom: -5,
   },
 });

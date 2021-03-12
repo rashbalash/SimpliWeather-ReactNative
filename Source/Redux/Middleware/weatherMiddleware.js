@@ -103,6 +103,7 @@ function dispatchCurrentData(store, dailyWeatherData, currentPage) {
     isDay,
     hi: Math.round(dailyWeatherData.daily[0].temp.max),
     lo: Math.round(dailyWeatherData.daily[0].temp.min),
+    feelsLikeTemp: Math.round(dailyWeatherData.current.feels_like),
   };
 
   store.dispatch(setCurrentWeather(currentWeather, currentPage));
