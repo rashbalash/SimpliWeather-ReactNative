@@ -5,6 +5,7 @@ import {
   changeTheme,
   showUnitAction,
   showThemeAction,
+  showAllLocationsAction,
 } from "../../Redux/Actions/Actions";
 import { withTheme } from "react-native-paper";
 
@@ -15,6 +16,7 @@ const mapStateToProps = (state) => {
     currentPage: state.reducer.currentPage,
     showThemeAction: state.reducer.showThemeAction,
     showUnitAction: state.reducer.showUnitAction,
+    showAllLocationsAction: state.reducer.showAllLocationsAction,
   };
 };
 
@@ -31,6 +33,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onShowThemeAction: () => {
       dispatch(showThemeAction());
+    },
+    onShowAllLocationsAction: () => {
+      dispatch(showAllLocationsAction());
     },
   };
 };

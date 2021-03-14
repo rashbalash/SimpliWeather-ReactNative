@@ -14,10 +14,13 @@ import SimpliWeatherViewContainer from "../SimpliWeatherView/SimpliWeatherViewCo
 import About from "../About/About";
 import { IconButton, useTheme, ToggleButton } from "react-native-paper";
 
+import AllLocationsContainer from "../AllLocations/AllLocationsContainer";
+
 export default function SettingsPage(props) {
   const { colors } = useTheme();
 
   const [aboutModalOpen, setAboutModalOpen] = useState(false);
+  const [allLocationsModalOpen, setAllLocationsModalOpen] = useState(false);
 
   const unitIcon =
     props.weatherUnit === "metric"
@@ -32,7 +35,7 @@ export default function SettingsPage(props) {
       presentationStyle={"fullScreen"}
     >
       <ScrollView style={{ backgroundColor: colors.background }}>
-        <View style={(styles.centeredView, { paddingTop: 60 })}>
+        <View style={(styles.centeredView, { paddingTop: 45 })}>
           <SimpliWeatherViewContainer style={styles.modalView}>
             <View style={styles.modalHeader}>
               <SimpliWeatherTextContainer style={styles.settingsTitle}>
@@ -69,6 +72,18 @@ export default function SettingsPage(props) {
                 onPress={() => props.onThemeChange()}
               />
             </View>
+            <View style={styles.settingTogglesContainer}>
+              <SimpliWeatherTextContainer style={styles.settingDescriptions}>
+                Show All Locations
+              </SimpliWeatherTextContainer>
+              <ToggleButton
+                style={styles.toggleButtonStyles}
+                icon="format-list-bulleted-square"
+                onPress={() => {
+                  setAllLocationsModalOpen(!allLocationsModalOpen);
+                }}
+              />
+            </View>
             <SimpliWeatherTextContainer style={styles.subTitles}>
               Quick Actions
             </SimpliWeatherTextContainer>
@@ -96,6 +111,21 @@ export default function SettingsPage(props) {
                 value={props.showThemeAction}
               />
             </View>
+            <View style={styles.settingTogglesContainer}>
+              <SimpliWeatherTextContainer style={styles.settingDescriptions}>
+                All Locations Toggle
+              </SimpliWeatherTextContainer>
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={
+                  props.showAllLocationsAction ? "#f5dd4b" : "#f4f3f4"
+                }
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={props.onShowAllLocationsAction}
+                value={props.showAllLocationsAction}
+              />
+            </View>
+
             {/* Quick Action Button Placement */}
             {/* Bottom Left, Bottom Right, Top Left, Top Right */}
 
@@ -167,6 +197,10 @@ export default function SettingsPage(props) {
       <About
         isModalOpen={aboutModalOpen}
         closeModal={() => setAboutModalOpen(!aboutModalOpen)}
+      />
+      <AllLocationsContainer
+        isModalOpen={allLocationsModalOpen}
+        closeModal={() => setAllLocationsModalOpen(!allLocationsModalOpen)}
       />
     </Modal>
   );

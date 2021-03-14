@@ -20,6 +20,8 @@ import {
   SHOW_THEME_ACTION,
   SHOW_UNIT_ACTION,
   SET_DEFAULT_COUNTRY_CODE,
+  SHOW_ALL_LOCATIONS_ACTION,
+  UPDATE_LOCATION_ORDER,
 } from "../Actions/Actions";
 import { weatherUnit, theme } from "../../globalConstants";
 
@@ -173,6 +175,29 @@ function reducer(state = {}, action) {
       return {
         ...state,
         showUnitAction: state.showUnitAction === true ? false : true,
+      };
+
+    case SHOW_ALL_LOCATIONS_ACTION:
+      return {
+        ...state,
+        showAllLocationsAction:
+          state.showAllLocationsAction === true ? false : true,
+      };
+
+    case UPDATE_LOCATION_ORDER:
+      const orderOfLocations = action.newLocationOrder.map((location) => {
+        return location.locationName;
+      });
+
+      const newLocationList = state.allLocations.sort(function (a, b) {
+        return (
+          orderOfLocations.indexOf(a.name) - orderOfLocations.indexOf(b.name)
+        );
+      });
+
+      return {
+        ...state,
+        allLocations: newLocationList,
       };
 
     case SET_LOCATION_NAME:
@@ -347,6 +372,7 @@ export const initialState = {
   loading: false,
   showUnitAction: true,
   showThemeAction: true,
+  showAllLocationsAction: true,
   defaultCountryCode: "US",
 };
 

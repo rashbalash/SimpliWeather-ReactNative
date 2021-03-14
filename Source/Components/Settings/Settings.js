@@ -4,12 +4,14 @@ import { FAB, Portal } from "react-native-paper";
 
 import AddNewLocation from "../AddNewLocation/AddNewLocation";
 import SettingsPageContainer from "../SettingsPage/SettingsPageContainer";
+import AllLocationsContainer from "../AllLocations/AllLocationsContainer";
 
 class Settings extends Component {
   state = {
     open: false,
     settingsModalOpen: false,
     isAddingLocation: false,
+    allLocationsModalOpen: false,
   };
 
   _onStateChange = ({ open }) => this.setState({ open });
@@ -36,6 +38,13 @@ class Settings extends Component {
         icon: "theme-light-dark",
         label: "Dark or Light Mode",
         onPress: () => this.props.onThemeChange(),
+      });
+    }
+    if (this.props.showAllLocationsAction === true) {
+      additionalActionArray.push({
+        icon: "format-list-bulleted-square",
+        label: "All Locations",
+        onPress: () => this.setState({ allLocationsModalOpen: true }),
       });
     }
 
@@ -78,6 +87,10 @@ class Settings extends Component {
         <SettingsPageContainer
           isModalOpen={this.state.settingsModalOpen}
           closeModal={() => this.setState({ settingsModalOpen: false })}
+        />
+        <AllLocationsContainer
+          isModalOpen={this.state.allLocationsModalOpen}
+          closeModal={() => this.setState({ allLocationsModalOpen: false })}
         />
       </View>
     );

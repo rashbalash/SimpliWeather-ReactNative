@@ -22,6 +22,8 @@ export const UPDATE_CURRENT_LOCATION = "UPDATE_CURRENT_LOCATION";
 export const SHOW_THEME_ACTION = "SHOW_THEME_ACTION";
 export const SHOW_UNIT_ACTION = "SHOW_UNIT_ACTION";
 export const SET_DEFAULT_COUNTRY_CODE = "SET_DEFAULT_COUNTRY_CODE";
+export const SHOW_ALL_LOCATIONS_ACTION = "SHOW_ALL_LOCATIONS_ACTION";
+export const UPDATE_LOCATION_ORDER = "UPDATE_LOCATION_ORDER";
 
 // Action Creators
 export function startApp() {
@@ -127,6 +129,19 @@ export function showThemeAction() {
 export function showUnitAction() {
   return {
     type: SHOW_UNIT_ACTION,
+  };
+}
+
+export function showAllLocationsAction() {
+  return {
+    type: SHOW_ALL_LOCATIONS_ACTION,
+  };
+}
+
+export function updateLocationOrder(newLocationOrder) {
+  return {
+    type: UPDATE_LOCATION_ORDER,
+    newLocationOrder,
   };
 }
 

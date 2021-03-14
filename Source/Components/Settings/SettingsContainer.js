@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
     currentPage: state.reducer.currentPage,
     showThemeAction: state.reducer.showThemeAction,
     showUnitAction: state.reducer.showUnitAction,
+    showAllLocationsAction: state.reducer.showAllLocationsAction,
   };
 };
 
