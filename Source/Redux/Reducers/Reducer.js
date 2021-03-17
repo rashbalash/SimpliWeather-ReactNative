@@ -205,6 +205,17 @@ function reducer(state = {}, action) {
         (newLocationArr, oneLocation, index) => {
           if (index !== action.currentPage) {
             newLocationArr.push(oneLocation);
+          } else if (
+            oneLocation.isCurrentLocation === false &&
+            oneLocation.hasOwnProperty("city")
+          ) {
+            console.log(oneLocation);
+            newLocationArr.push({
+              ...oneLocation,
+              name: oneLocation.city,
+              lat: action.weatherData.coord.lat,
+              lon: action.weatherData.coord.lon,
+            });
           } else {
             newLocationArr.push({
               ...oneLocation,
