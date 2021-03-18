@@ -1,6 +1,6 @@
 import React from "react";
 
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, Text } from "react-native";
 
 import Header from "../Header/Header";
 import CurrentWeather from "../CurrentTemperature/CurrentWeather";

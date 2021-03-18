@@ -48,11 +48,10 @@ const styles = StyleSheet.create({
   currentWeatherIcon: {
     width: 210,
     height: 210,
-    marginLeft: "-4%",
   },
   CurrentTemp: {
     fontSize: 96,
-    marginRight: "3%",
+    marginRight: "2%",
     opacity: 0.9,
   },
   feelsLikeTemp: {

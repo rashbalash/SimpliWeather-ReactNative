@@ -33,7 +33,8 @@ export default function LocationRow(props) {
         />
 
         <SimpliWeatherTextContainer style={{ fontSize: 24 }}>
-          {props.item.locationTemp}&deg; |{" "}
+          {" "}
+          {props.item.locationTemp}&deg;{"  "}|{"  "}
         </SimpliWeatherTextContainer>
         <SimpliWeatherTextContainer
           style={{

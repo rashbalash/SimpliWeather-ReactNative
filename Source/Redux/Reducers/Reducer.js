@@ -22,6 +22,7 @@ import {
   SET_DEFAULT_COUNTRY_CODE,
   SHOW_ALL_LOCATIONS_ACTION,
   UPDATE_LOCATION_ORDER,
+  SET_BUTTON_PLACEMENT,
 } from "../Actions/Actions";
 import { weatherUnit, theme } from "../../globalConstants";
 
@@ -87,6 +88,12 @@ function reducer(state = {}, action) {
         allLocations: newLocations,
         currentPage: newCurrentPage,
         currentLocationUsed: !setCurrentLocationRemoved,
+      };
+
+    case SET_BUTTON_PLACEMENT:
+      return {
+        ...state,
+        buttonPlacement: action.buttonPlacement,
       };
 
     case SET_NEW_LOCATION:
@@ -209,7 +216,6 @@ function reducer(state = {}, action) {
             oneLocation.isCurrentLocation === false &&
             oneLocation.hasOwnProperty("city")
           ) {
-            console.log(oneLocation);
             newLocationArr.push({
               ...oneLocation,
               name: oneLocation.city,
@@ -385,6 +391,7 @@ export const initialState = {
   showThemeAction: true,
   showAllLocationsAction: true,
   defaultCountryCode: "US",
+  buttonPlacement: "bottomRight",
 };
 
 export default reducer;

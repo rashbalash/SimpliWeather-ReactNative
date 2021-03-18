@@ -24,6 +24,7 @@ export const SHOW_UNIT_ACTION = "SHOW_UNIT_ACTION";
 export const SET_DEFAULT_COUNTRY_CODE = "SET_DEFAULT_COUNTRY_CODE";
 export const SHOW_ALL_LOCATIONS_ACTION = "SHOW_ALL_LOCATIONS_ACTION";
 export const UPDATE_LOCATION_ORDER = "UPDATE_LOCATION_ORDER";
+export const SET_BUTTON_PLACEMENT = "SET_BUTTON_PLACEMENT";
 
 // Action Creators
 export function startApp() {
@@ -61,6 +62,13 @@ export function setDefaultCountryCode(countryCode) {
   return {
     type: SET_DEFAULT_COUNTRY_CODE,
     countryCode,
+  };
+}
+
+export function setButtonPlacement(buttonPlacement) {
+  return {
+    type: SET_BUTTON_PLACEMENT,
+    buttonPlacement,
   };
 }
 

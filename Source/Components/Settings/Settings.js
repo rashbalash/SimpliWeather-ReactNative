@@ -58,6 +58,7 @@ class Settings extends Component {
               {
                 icon: "cog",
                 label: "Settings",
+                style: styles.actions,
                 onPress: () => this.setState({ settingsModalOpen: true }),
               },
               {
@@ -73,10 +74,11 @@ class Settings extends Component {
               },
               ...additionalActionArray,
             ]}
-            small
             onStateChange={this._onStateChange}
             onPress={() => {}}
-            fabStyle={styles.fab}
+            fabStyle={{
+              backgroundColor: "#D64045",
+            }}
           />
         </Portal>
 
@@ -98,9 +100,7 @@ class Settings extends Component {
 }
 
 const styles = StyleSheet.create({
-  fab: {
-    backgroundColor: "#D64045",
-  },
+  actions: {},
 });
 
 export default Settings;

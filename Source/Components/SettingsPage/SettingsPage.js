@@ -15,6 +15,7 @@ import About from "../About/About";
 import { IconButton, useTheme, ToggleButton } from "react-native-paper";
 
 import AllLocationsContainer from "../AllLocations/AllLocationsContainer";
+import { setButtonPlacement } from "../../Redux/Actions/Actions";
 
 export default function SettingsPage(props) {
   const { colors } = useTheme();
@@ -84,9 +85,38 @@ export default function SettingsPage(props) {
                 }}
               />
             </View>
+
             <SimpliWeatherTextContainer style={styles.subTitles}>
               Quick Actions
             </SimpliWeatherTextContainer>
+            {/* <View style={styles.settingTogglesContainer}>
+              <SimpliWeatherTextContainer style={styles.settingDescriptions}>
+                Placement
+              </SimpliWeatherTextContainer>
+              <ToggleButton.Row
+                onValueChange={(value) => props.onSetButtonPlacement(value)}
+                value={props.buttonPlacement}
+              >
+                <ToggleButton
+                  style={styles.QaPlacement}
+                  icon={require("./Assets/bottomLeft.png")}
+                  value="bottomLeft"
+                />
+                <ToggleButton
+                  icon={require("./Assets/topLeft.png")}
+                  value="topLeft"
+                />
+                <ToggleButton
+                  icon={require("./Assets/topRight.png")}
+                  value="topRight"
+                />
+                <ToggleButton
+                  style={styles.QaPlacement}
+                  icon={require("./Assets/bottomRight.png")}
+                  value="bottomRight"
+                />
+              </ToggleButton.Row>
+            </View> */}
             <View style={styles.settingTogglesContainer}>
               <SimpliWeatherTextContainer style={styles.settingDescriptions}>
                 Temperature Toggle
@@ -125,9 +155,6 @@ export default function SettingsPage(props) {
                 value={props.showAllLocationsAction}
               />
             </View>
-
-            {/* Quick Action Button Placement */}
-            {/* Bottom Left, Bottom Right, Top Left, Top Right */}
 
             {/* Push Notifications */}
             {/* <SimpliWeatherTextContainer style={styles.subTitles}>
@@ -277,6 +304,9 @@ const styles = StyleSheet.create({
   },
   toggleButtonStyles: {
     borderWidth: 1,
+    borderRadius: 15,
+  },
+  QaPlacement: {
     borderRadius: 15,
   },
 });

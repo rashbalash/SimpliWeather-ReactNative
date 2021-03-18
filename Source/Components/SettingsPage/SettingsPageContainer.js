@@ -6,6 +6,7 @@ import {
   showUnitAction,
   showThemeAction,
   showAllLocationsAction,
+  setButtonPlacement,
 } from "../../Redux/Actions/Actions";
 import { withTheme } from "react-native-paper";
 
@@ -17,6 +18,7 @@ const mapStateToProps = (state) => {
     showThemeAction: state.reducer.showThemeAction,
     showUnitAction: state.reducer.showUnitAction,
     showAllLocationsAction: state.reducer.showAllLocationsAction,
+    buttonPlacement: state.reducer.buttonPlacement,
   };
 };
 
@@ -36,6 +38,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onShowAllLocationsAction: () => {
       dispatch(showAllLocationsAction());
+    },
+    onSetButtonPlacement: (buttonPlacement) => {
+      dispatch(setButtonPlacement(buttonPlacement));
     },
   };
 };
