@@ -11,6 +11,8 @@
     <key>EXUpdatesLaunchWaitMs</key>
     <integer>0</integer>
     <key>EXUpdatesURL</key>
-    <string>https://example.com</string>
+    <string>https://exp.host/@rashbalash/SimpliWeather</string>
+    <key>EXUpdatesReleaseChannel</key>
+    <string>default</string>
   </dict>
 </plist>
