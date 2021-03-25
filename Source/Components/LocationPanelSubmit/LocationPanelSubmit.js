@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import React, { useRef, useState } from "react";
 
-import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextContainer";
 import TextInputSearch from "../TextInputSearch/TextInputSearch";
