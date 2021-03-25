@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   Alert,
+  Platform,
 } from "react-native";
 import React, { useRef, useState } from "react";
 
@@ -163,7 +164,7 @@ export default function LocationPanelSubmit(props) {
             onPress={() => {
               Permissions.getAsync(Permissions.LOCATION).then(({ status }) => {
                 console.log(status);
-                if (status === "granted") {
+                if (status === "granted" || Platform.OS !== "android") {
                   getCurrentLocation(props);
                 } else {
                   Alert.alert(
