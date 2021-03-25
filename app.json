@@ -16,8 +16,7 @@
       "package": "com.SimpliWeather",
       "versionCode": 10,
       "useNextNotificationsApi": true,
-      "icon": "./assets/androidIcon.png",
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
+      "icon": "./assets/androidIcon.png"
     },
     "platforms": ["ios", "android", "web"],
     "version": "3.0",
