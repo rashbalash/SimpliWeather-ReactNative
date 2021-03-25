@@ -4,7 +4,7 @@
     "slug": "SimpliWeather",
     "ios": {
       "bundleIdentifier": "com.simpliweather",
-      "buildNumber": "3.0",
+      "buildNumber": "3.0.1",
       "supportsTablet": true,
       "icon": "./assets/iosIcon.png",
       "infoPlist": {
@@ -14,12 +14,12 @@
     },
     "android": {
       "package": "com.SimpliWeather",
-      "versionCode": 10,
+      "versionCode": 11,
       "useNextNotificationsApi": true,
       "icon": "./assets/androidIcon.png"
     },
     "platforms": ["ios", "android", "web"],
-    "version": "3.0",
+    "version": "3.0.1",
     "orientation": "portrait",
     "splash": {
       "image": "./assets/splash.png",
