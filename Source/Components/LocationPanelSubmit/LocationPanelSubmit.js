@@ -4,14 +4,16 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useRef, useState } from "react";
 
+import * as Location from "expo-location";
+import * as Permissions from "expo-permissions";
 import SimpliWeatherTextContainer from "../SimpliWeatherText/SimpliWeatherTextContainer";
 import TextInputSearch from "../TextInputSearch/TextInputSearch";
 import CountrySelect from "../CountrySelect/CountrySelect";
 import { ProgressBar } from "react-native-paper";
-
 export default function LocationPanelSubmit(props) {
   const [textInputVisible, setTextInputVisible] = props.isCurrentLocationUsed
     ? useState(true)
@@ -22,6 +24,14 @@ export default function LocationPanelSubmit(props) {
   const [currentCountryCode, setcurrentCountryCode] = useState(
     props.countryCode
   );
+
+  const getCurrentLocation = (props) => {
+    props.getNewLocation();
+    if (!!props.closeModal) {
+      props.closeModal();
+    }
+    setComponentsInvisible(!componentsInvisible);
+  };
 
   const FadeInViewTwo = (props) => {
     const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
@@ -151,11 +161,27 @@ export default function LocationPanelSubmit(props) {
             }
             disabled={props.isCurrentLocationUsed}
             onPress={() => {
-              props.getNewLocation();
-              if (!!props.closeModal) {
-                props.closeModal();
-              }
-              setComponentsInvisible(!componentsInvisible);
+              Permissions.getAsync(Permissions.LOCATION).then(({ status }) => {
+                console.log(status);
+                if (status === "granted") {
+                  getCurrentLocation(props);
+                } else {
+                  Alert.alert(
+                    "Location Permission",
+                    "With your permission, Simpliweather uses location data to enable current location weather data",
+                    [
+                      {
+                        text: "Cancel",
+                        style: "cancel",
+                      },
+                      {
+                        text: "Continue",
+                        onPress: () => getCurrentLocation(props),
+                      },
+                    ]
+                  );
+                }
+              });
             }}
           >
             <Text style={styles.continueText}>Continue</Text>
