@@ -1,7 +1,7 @@
 # SimpliWeather-ReactNative
 SimpliWeather rebuilt from the ground up for Mobile Devices
 
-## Upcoming Features - To Be Added by June 2021
+## Upcoming Features - To Be Added by February 2022
 1) Weather Alert Push Notifications
 2) Weather Widgets (iOS and Android)
 3) Clothing Suggestions
